@@ -4,17 +4,15 @@ body {
 }
 
 input[type="color"] {
-    height: 44px;
-    width: 44px;
-    border: none;
-    margin-top: 2px;
-    margin-left: -2px;
+    height: 64px;
+    width: 64px;
+
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 0;
 }
 input[type="color"]::-webkit-color-swatch {
-	border: none;
+    border: 2px black;
 }
 
 .palette {
@@ -28,10 +26,17 @@ input[type="color"]::-webkit-color-swatch {
 .btn-pal.color {
     background-color: #4A4A4A;
 }
+.btn-pal.color:hover {
+    background-color: #727272;
+}
 .btn-pal.new {
     background-color: #F1F1F1;
     font-size: 54px;
     color:#A3A3A3;
     vertical-align: middle;
-    margin-top:-35px;
+    margin-top:-54px;
+}
+.btn-pal.new:hover {
+    background-color: #FFFFFF;
+    color:#BBBBBB;
 }

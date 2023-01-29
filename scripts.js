@@ -14,22 +14,19 @@ function addEmptyBtn(pal, i) {
 }
 
 function addColorBtn(pal, c, i) {
-    let btn = document.createElement("button");
+    let btn = document.createElement("input");
     btn.classList.add("btn-pal");
     btn.classList.add("color");
-    // btn.draggable = true;
-    // btn.addEventListener('drag', setDragging);
-    // btn.addEventListener('dragover', setDraggedOver);
-    // btn.addEventListener('drop', compare);
-
-    var col = document.createElement("input");
-    col.type = "color";
-    col.id = i;
-    col.value = c;
-    col.addEventListener('change', function() {
+    btn.draggable = true;
+    btn.addEventListener('drag', setDragging);
+    btn.addEventListener('dragover', setDraggedOver);
+    btn.addEventListener('drop', applyDrag);
+    btn.type = "color";
+    btn.id = i;
+    btn.value = c;
+    btn.addEventListener('change', function() {
         modify(this.id);
     });
-    btn.appendChild(col);
     pal.appendChild(btn);
 }
 
@@ -44,6 +41,22 @@ function drawPalette() {
         addEmptyBtn(pal, 1)
     }
 }
+
+const setDragging = (e) =>{
+    dragging = e.target.id
+}
+function setDraggedOver(e) {
+    e.preventDefault();
+    draggedOver = e.target.id
+}
+
+const applyDrag = (e) =>{
+    var color1 = palette[dragging];
+    var color2 = palette[draggedOver];
+    palette[draggedOver] = color1;
+    palette[dragging] = color2;
+    drawPalette();
+};
 
 function add(id) {
     palette.splice(id == 0 ? 0 : palette.length, 0, "#000000");
