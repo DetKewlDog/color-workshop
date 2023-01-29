@@ -6,16 +6,16 @@ function getPaletteElement() {
     return document.getElementById(palName);
 }
 
-window.onload = newPal();
+window.onload = createPalette();
 
-function newPal() {
+function createPalette() {
     let workspace = document.getElementById('workspace');
     let pal = document.createElement("section");
     palIndex++;
     palName = pal.id = `p${palIndex}`;
     pal.classList.add("palette");
-    workspace.appendChild(pal);
-    workspace.appendChild(document.createElement('br'));
+    let addpal = document.getElementById("addpal");
+    workspace.insertBefore(pal, addpal);
     drawPalette();
     changePal(palName);
 }
