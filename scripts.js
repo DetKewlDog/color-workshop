@@ -1,28 +1,52 @@
-let palette = [0]
+let palette = []
 
 window.onload = drawPalette();
 
-function emptyBtn(i) {
-    return `<button id="${i}" class="btn-pal new" onclick="add(${i})">+</button>\n`;
+function addEmptyBtn(pal, i) {
+    let btn = document.createElement("button");
+    btn.classList.add("btn-pal");
+    btn.classList.add("new");
+    btn.addEventListener('click', function() {
+        add(i);
+    });
+    btn.innerText = '+';
+    pal.appendChild(btn);
 }
-function colorBtn (c, i) {
-    return `<button class="btn-pal color"><input type="color" id="${i}" value="${c}" onchange="modify(${i})"></button>\n`;
+
+function addColorBtn(pal, c, i) {
+    let btn = document.createElement("button");
+    btn.classList.add("btn-pal");
+    btn.classList.add("color");
+    // btn.draggable = true;
+    // btn.addEventListener('drag', setDragging);
+    // btn.addEventListener('dragover', setDraggedOver);
+    // btn.addEventListener('drop', compare);
+
+    var col = document.createElement("input");
+    col.type = "color";
+    col.id = i;
+    col.value = c;
+    col.addEventListener('change', function() {
+        modify(this.id);
+    });
+    btn.appendChild(col);
+    pal.appendChild(btn);
 }
 
 function drawPalette() {
-    let res = "";
+    let pal = document.getElementById("palette");
+    pal.innerText = '';
+    addEmptyBtn(pal, 0)
     palette.forEach(function(color, index) {
-        res += color == 0 ?
-            emptyBtn(index) : 
-            colorBtn(color, index);
+        addColorBtn(pal, color, index);
     });
-    document.getElementById("palette").innerHTML = res;
+    if (palette.length != 0) {
+        addEmptyBtn(pal, 1)
+    }
 }
 
 function add(id) {
-    if (palette.length == 1) palette.push(0);
-    let index = id == 0 ? 1 : id;
-    palette.splice(index, 0, "#000000");
+    palette.splice(id == 0 ? 0 : palette.length, 0, "#000000");
     drawPalette();
 }
 
