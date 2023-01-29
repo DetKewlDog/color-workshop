@@ -1,18 +1,17 @@
 body {
-    background-color: #202124;
+    background-color: #282830;
     color: white;
 }
 
 input[type="color"] {
     height: 64px;
     width: 64px;
-
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 0;
 }
 input[type="color"]::-webkit-color-swatch {
-    border: 2px #202124;
+    border: 2px #282830;
 }
 
 .palette {
@@ -24,19 +23,20 @@ input[type="color"]::-webkit-color-swatch {
     width: 64px;
 }
 .btn-pal.color {
-    background-color: #4A4A4A;
+    background-color: #4A4A52;
 }
 .btn-pal.color:hover {
-    background-color: #727272;
+    background-color: #72727A;
 }
 .btn-pal.new {
-    background-color: #202124;
+    background-color: #282830;
     font-size: 54px;
-    color:#4A4A4A;
+    color:#4A4A52;
     vertical-align: middle;
-    margin-top:-54px;
+    margin-top: -54px;
+    border: none;
 }
 .btn-pal.new:hover {
-    background-color: #202124;
-    color:#727272;
+    background-color: #383840;
+    color:#72727A;
 }
