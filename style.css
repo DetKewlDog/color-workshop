@@ -27,10 +27,6 @@ input[type="color"]::-webkit-color-swatch {
     width: 60px;
 }
 
-.palette {
-    height: 65px;
-}
-
 .btn-pal {
     height: 64px;
     width: 64px;
