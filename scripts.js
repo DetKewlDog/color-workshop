@@ -1,16 +1,41 @@
-let palette = []
+let p_dict = {}
 
-const pal = document.getElementById('palette');
+let palName = 'p1';
+let palIndex = 0;
+function getPaletteElement() {
+    return document.getElementById(palName);
+}
 
-window.onload = drawPalette();
+window.onload = newPal();
+
+function newPal() {
+    let workspace = document.getElementById('workspace');
+    let pal = document.createElement("section");
+    palIndex++;
+    palName = pal.id = `p${palIndex}`;
+    pal.classList.add("palette");
+    workspace.appendChild(pal);
+    workspace.appendChild(document.createElement('br'));
+    drawPalette();
+    changePal(palName);
+}
+
+function changePal(palName) {
+    if (!(palName in p_dict)) p_dict[palName] = [];
+} 
 
 function addEmptyBtn(isRight) {
     let btn = document.createElement("button");
     btn.classList.add("btn-pal");
     btn.classList.add("new");
-    btn.addEventListener('click', () => add(isRight) );
+    btn.addEventListener('click', () => { 
+        palName = p;
+        changePal(p);
+        add(isRight)
+    } );
     btn.innerText = '+';
-    pal.appendChild(btn);
+    var p = palName;
+    getPaletteElement().appendChild(btn);
 }
 
 function addColorBtn(color, index) {
@@ -29,14 +54,19 @@ function addColorBtn(color, index) {
         remove(index);
         ev.preventDefault();
     } );
-    pal.appendChild(btn);
+    var p = palName;
+    btn.addEventListener('mouseenter', function() {
+        palName = p;
+        changePal(p);
+    } );
+    getPaletteElement().appendChild(btn);
 }
 
 function drawPalette() {
-    pal.innerText = '';
-    addEmptyBtn(0)
-    palette.forEach((color, index) => addColorBtn(color, index));
-    if (palette.length != 0) addEmptyBtn(1)
+    getPaletteElement().innerText = '';
+    addEmptyBtn(0);
+    p_dict[palName]?.forEach((color, index) => addColorBtn(color, index));
+    if (p_dict[palName] != null && p_dict[palName].length != 0) addEmptyBtn(1)
 }
 
 const setDragging = (e) => dragging = e.target.id;
@@ -46,24 +76,25 @@ function setDraggedOver(e) {
 }
 
 const applyDrag = (e) =>{
-    var color1 = palette[dragging];
-    var color2 = palette[draggedOver];
-    palette[draggedOver] = color1;
-    palette[dragging] = color2;
+    var color1 = p_dict[palName][dragging];
+    var color2 = p_dict[palName][draggedOver];
+    p_dict[palName][draggedOver] = color1;
+    p_dict[palName][dragging] = color2;
     drawPalette();
 };
 
 function add(isRight) {
-    palette.splice(isRight ? palette.length : 0, 0, "#000000");
+    p_dict[palName].splice(isRight ? p_dict[palName].length : 0, 0, "#000000");
     drawPalette();
 }
 
 function modify(id) {
-    palette[id] = document.getElementById(id).value;
+    p_dict[palName][id] = document.getElementById(palName).children[id + 1].value;
+    console.log(p_dict);
 }
 
 function remove(id) {
-    palette.splice(id, 1);
+    p_dict[palName].splice(id, 1);
     drawPalette();
 }
 
