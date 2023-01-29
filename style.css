@@ -2,6 +2,14 @@ body {
     background-color: #282830;
     color: white;
     user-select:none;
+    font-family: "Cutive", sans-serif;
+}
+h1 {
+    font-size: 48px;
+    height: 38px;
+}
+p {
+    color:#DEDEDE;
 }
 
 input[type="color"] {
@@ -20,7 +28,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .palette {
-    height: 64px;
+    height: 65px;
 }
 
 .btn-pal {
