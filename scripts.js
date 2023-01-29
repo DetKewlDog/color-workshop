@@ -22,16 +22,24 @@ function newPal() {
 
 function changePal(palName) {
     if (!(palName in p_dict)) p_dict[palName] = [];
-} 
+}
 
 function addEmptyBtn(isRight) {
     let btn = document.createElement("button");
     btn.classList.add("btn-pal");
     btn.classList.add("new");
-    btn.addEventListener('click', () => { 
+    btn.addEventListener('click', () => {
         palName = p;
         changePal(p);
         add(isRight)
+    } );
+    btn.addEventListener('contextmenu', (ev) => {
+        if (p_dict[palName].length == 0) {
+            delete p_dict[palName];
+            getPaletteElement().remove();
+        }
+        palName = Object.keys(p_dict)[0];
+        ev.preventDefault();
     } );
     btn.innerText = '+';
     var p = palName;
@@ -111,7 +119,7 @@ function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 }
-  
+
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
