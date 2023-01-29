@@ -13,7 +13,7 @@ function createPalette() {
     let pal = document.createElement("section");
     palIndex++;
     palName = pal.id = `p${palIndex}`;
-    pal.style.height = "64.5px";
+    pal.style.height = "65px";
     let addpal = document.getElementById("addpal");
     workspace.insertBefore(pal, addpal);
     drawPalette();
