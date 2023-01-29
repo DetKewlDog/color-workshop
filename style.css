@@ -12,7 +12,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 0;
 }
 input[type="color"]::-webkit-color-swatch {
-    border: 2px black;
+    border: 2px #202124;
 }
 
 .palette {
@@ -30,13 +30,13 @@ input[type="color"]::-webkit-color-swatch {
     background-color: #727272;
 }
 .btn-pal.new {
-    background-color: #F1F1F1;
+    background-color: #202124;
     font-size: 54px;
-    color:#A3A3A3;
+    color:#4A4A4A;
     vertical-align: middle;
     margin-top:-54px;
 }
 .btn-pal.new:hover {
-    background-color: #FFFFFF;
-    color:#BBBBBB;
+    background-color: #202124;
+    color:#727272;
 }
