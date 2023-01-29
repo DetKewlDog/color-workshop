@@ -34,7 +34,7 @@ function addEmptyBtn(isRight) {
         add(isRight)
     } );
     btn.addEventListener('contextmenu', (ev) => {
-        if (p_dict[palName].length == 0) {
+        if (ev.shiftKey || p_dict[palName].length == 0) {
             delete p_dict[palName];
             getPaletteElement().remove();
         }
@@ -60,6 +60,10 @@ function addColorBtn(color, index) {
     btn.addEventListener('change', () => modify(index) );
     btn.addEventListener('contextmenu', (ev) => {
         remove(index);
+        if (ev.shiftKey) {
+            delete p_dict[palName];
+            getPaletteElement().remove();
+        }
         ev.preventDefault();
     } );
     var p = palName;
