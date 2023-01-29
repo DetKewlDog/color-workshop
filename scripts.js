@@ -1,19 +1,19 @@
 let palette = []
 
+const pal = document.getElementById('palette');
+
 window.onload = drawPalette();
 
-function addEmptyBtn(pal, i) {
+function addEmptyBtn(isRight) {
     let btn = document.createElement("button");
     btn.classList.add("btn-pal");
     btn.classList.add("new");
-    btn.addEventListener('click', function() {
-        add(i);
-    });
+    btn.addEventListener('click', () => add(isRight) );
     btn.innerText = '+';
     pal.appendChild(btn);
 }
 
-function addColorBtn(pal, c, i) {
+function addColorBtn(color, index) {
     let btn = document.createElement("input");
     btn.classList.add("btn-pal");
     btn.classList.add("color");
@@ -22,29 +22,24 @@ function addColorBtn(pal, c, i) {
     btn.addEventListener('dragover', setDraggedOver);
     btn.addEventListener('drop', applyDrag);
     btn.type = "color";
-    btn.id = i;
-    btn.value = c;
-    btn.addEventListener('change', function() {
-        modify(this.id);
-    });
+    btn.id = index;
+    btn.value = color;
+    btn.addEventListener('change', () => modify(index) );
+    btn.addEventListener('contextmenu', (ev) => {
+        remove(index);
+        ev.preventDefault();
+    } );
     pal.appendChild(btn);
 }
 
 function drawPalette() {
-    let pal = document.getElementById("palette");
     pal.innerText = '';
-    addEmptyBtn(pal, 0)
-    palette.forEach(function(color, index) {
-        addColorBtn(pal, color, index);
-    });
-    if (palette.length != 0) {
-        addEmptyBtn(pal, 1)
-    }
+    addEmptyBtn(0)
+    palette.forEach((color, index) => addColorBtn(color, index));
+    if (palette.length != 0) addEmptyBtn(1)
 }
 
-const setDragging = (e) =>{
-    dragging = e.target.id
-}
+const setDragging = (e) => dragging = e.target.id;
 function setDraggedOver(e) {
     e.preventDefault();
     draggedOver = e.target.id
@@ -58,13 +53,18 @@ const applyDrag = (e) =>{
     drawPalette();
 };
 
-function add(id) {
-    palette.splice(id == 0 ? 0 : palette.length, 0, "#000000");
+function add(isRight) {
+    palette.splice(isRight ? palette.length : 0, 0, "#000000");
     drawPalette();
 }
 
 function modify(id) {
     palette[id] = document.getElementById(id).value;
+}
+
+function remove(id) {
+    palette.splice(id, 1);
+    drawPalette();
 }
 
 function hexToRgb(hex) {
@@ -74,7 +74,7 @@ function hexToRgb(hex) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;
-  }
+}
 
 function componentToHex(c) {
     var hex = c.toString(16);
@@ -96,7 +96,5 @@ function avgColor() {
         g: avg(c1.g, c2.g),
         b: avg(c1.b, c2.b)
     }
-    console.log(res);
-    console.log(rgbToHex(res.r, res.g, res.b));
     document.getElementById("c_res").value = rgbToHex(res.r, res.g, res.b);
 }

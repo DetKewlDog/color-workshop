@@ -5,13 +5,17 @@ body {
 
 input[type="color"] {
     height: 64px;
-    width: 64px;
+    width: 64px;    
 }
 input[type="color"]::-webkit-color-swatch-wrapper {
 	padding: 0;
 }
 input[type="color"]::-webkit-color-swatch {
     border: 2px #282830;
+    border-radius: 4px;
+    margin-top: 1px;
+    height: 60px;
+    width: 60px;
 }
 
 .palette {
@@ -21,6 +25,8 @@ input[type="color"]::-webkit-color-swatch {
 .btn-pal {
     height: 64px;
     width: 64px;
+    border: none;
+    border-radius: 4px;
 }
 .btn-pal.color {
     background-color: #4A4A52;
