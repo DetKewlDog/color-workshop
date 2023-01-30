@@ -84,9 +84,9 @@ function drawPalette() {
     p.addEventListener('drag', setDragging);
     p.addEventListener('dragover', setDraggedOver);
     p.addEventListener('drop', dragPalette);
-    addEmptyBtn(0);
+    if (p_dict[palName] == null || p_dict[palName].length < 10) addEmptyBtn(0);
     p_dict[palName]?.forEach((color, index) => addColorBtn(color, index));
-    if (p_dict[palName] != null && p_dict[palName].length != 0) addEmptyBtn(1)
+    if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < 10) addEmptyBtn(1)
 }
 
 function setDragging (e) { 

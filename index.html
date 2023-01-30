@@ -8,19 +8,26 @@
     <script src="color.js"></script>
 </head>
 <body>
-    <center>
+    <div style="text-align: center; width: 100%;">
         <h1>🎨 Color Workshop 🎨</h1>
         <p>by DetKewlDog</p>
-    </center>
-    <center id="workspace" style="margin-top: 5%;">
-        <button id="addpal" class="btn-pal new" oncontextmenu="return false;" onclick="createPalette()">▼</button>
-    </center>
+    </div>
+
+    <div style="display:flex; width:100%; margin-top: 5%;">
+        <div class="text-small">Image Manipulation (SOON™)</div>
+
+        <div id="workspace" style="width: 50%;">
+            <button id="addpal" class="btn-pal new" oncontextmenu="return false;" onclick="createPalette()">▼</button>
+        </div>
+
+        <div class="text-small">Color Manipulation (SOON™)</div>
+    </div>
+
     <script src="palette.js"></script>
+
     <footer>
-        <p>
-            <p class="text-small">Swap ⌃ ・ Clone ⎇ ・ Delete 🖱 ・ Palette ⇧</p>
-            Site created by DetKewlDog, and is <a href="https://github.com/DetKewlDog/color-workshop" target="_blank">open-source on GitHub</a>
-        </p>
+        <p class="text-small">Swap ⌃ ・ Clone ⎇ ・ Delete 🖱 ・ Palette ⇧</p>
+        Site created by DetKewlDog, and is <a href="https://github.com/DetKewlDog/color-workshop" target="_blank">open-source on GitHub</a>
    </footer>
 </body>
 </html>

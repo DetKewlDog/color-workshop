@@ -24,6 +24,10 @@ footer {
     margin: 0 auto;
     text-align: center;
 }
+div {
+    text-align: center;
+    width: 25%;
+}
 
 input[type="color"] {
     height: 64px;
