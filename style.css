@@ -3,6 +3,10 @@ body {
     color: white;
     user-select:none;
     font-family: "Cutive", sans-serif;
+    user-select: none; /* CSS3 (little to no support) */
+    -ms-user-select: none; /* IE 10+ */
+   -moz-user-select: none; /* Gecko (Firefox) */
+    -webkit-user-select: none; /* Webkit (Safari, Chrome) */
 }
 h1 {
     font-size: 48px;

@@ -1,9 +1,4 @@
-let p_dict = {}
-
-let palName = 'p1';
-let palIndex = 0;
-let parent1;
-let parent2;
+let p_dict = {}, palName = 'p1', palIndex = 0, parent1 = undefined, parent2 = undefined;
 
 function getPaletteElement() {
     return document.getElementById(palName);
@@ -11,11 +6,10 @@ function getPaletteElement() {
 
 window.onload = createPalette();
 
-function createPalette() {
+function createPalette(name = "") {
     let workspace = document.getElementById('workspace');
     let pal = document.createElement("section");
-    palIndex++;
-    palName = pal.id = `p${palIndex}`;
+    palName = pal.id = (name == "" ? `p${++palIndex}` : name);
     pal.style.height = "66px";
     let addpal = document.getElementById("addpal");
     workspace.insertBefore(pal, addpal);
@@ -101,9 +95,37 @@ function setDraggedOver(e) {
 
 function dragPalette(e) {
     if (!dragging.startsWith("p") || !draggedOver.startsWith("p")) return;
-    var temp = p_dict[dragging];
-    p_dict[dragging] = p_dict[draggedOver];
-    p_dict[draggedOver] = temp;
+    // swap
+    if (e.ctrlKey) {
+        var temp = p_dict[dragging];
+        p_dict[dragging] = p_dict[draggedOver];
+        p_dict[draggedOver] = temp;
+    }
+    // copy
+    else if (e.altKey) {
+        p_dict[draggedOver] = p_dict[dragging];
+    }
+    // move
+    else {
+        var keys = Object.keys(p_dict), values = Object.values(p_dict);
+        var i1 = keys.indexOf(dragging), i2 = keys.indexOf(draggedOver);
+        var el = keys[i1];
+        keys.splice(i1, 1);
+        keys.splice(i2, 0, el);
+        el = values[i1];
+        values.splice(i1, 1);
+        values.splice(i2, 0, el);
+        p_dict = {};
+        keys.forEach((key) => {
+            changePal(key);
+            getPaletteElement().remove();
+        })
+        keys.forEach((key, i) => {
+            p_dict[key] = values[i];
+            createPalette(key);
+        });
+        return;
+    }
     for (let key in p_dict) {
         changePal(key);
         drawPalette();
@@ -111,19 +133,46 @@ function dragPalette(e) {
 }
 
 function applyDrag (e) {
-    var p1 = parent1.id;
-    var p2 = parent2.id;
+    var p1 = parent1.id, p2 = parent2.id;
+    // move between palettes
     if (p1 != p2) {
-        p_dict[p2].splice(draggedOver, 0, p_dict[p1][dragging]);
-        remove(dragging);
+        // swap
+        if (e.ctrlKey) {
+            var temp = p_dict[p1][dragging];
+            p_dict[p1][dragging] = p_dict[p2][draggedOver];
+            p_dict[p2][draggedOver] = temp;
+            drawPalette();
+        }
+        // copy
+        else if (e.altKey) {
+            p_dict[p2][draggedOver] = p_dict[p1][dragging];
+        }
+        // move
+        else {
+            p_dict[p2].splice(draggedOver, 0, p_dict[p1][dragging]);
+            remove(dragging);
+        }
         changePal(p1);
         changePal(p2);
         drawPalette();
         return;
     }
-    var temp = p_dict[palName][dragging];
-    p_dict[palName][dragging] = p_dict[palName][draggedOver];
-    p_dict[palName][draggedOver] = temp;
+    // swap
+    if (e.ctrlKey) {
+        var temp = p_dict[palName][dragging];
+        p_dict[palName][dragging] = p_dict[palName][draggedOver];
+        p_dict[palName][draggedOver] = temp;
+    }
+    // copy
+    else if (e.altKey) {
+        p_dict[palName][draggedOver] = p_dict[palName][dragging];
+    }
+    // move
+    else {
+        var el = p_dict[palName][dragging];
+        p_dict[palName].splice(dragging, 1);
+        p_dict[palName].splice(draggedOver, 0, el);
+    }
     drawPalette();
 };
 
