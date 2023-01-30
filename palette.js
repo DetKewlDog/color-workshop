@@ -1,7 +1,7 @@
 let p_dict = {}, palName = 'p1', palIndex = 0, parent1 = undefined, parent2 = undefined;
 
 function getPaletteElement() {
-    return document.getElementById(palName);
+    return document.querySelector(`#${palName}`);
 }
 
 window.onload = createPalette();
@@ -189,7 +189,7 @@ function add(isRight) {
 }
 
 function modify(id) {
-    p_dict[palName][id] = document.getElementById(palName).children[id + 1].value;
+    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + 1].value;
 }
 
 function remove(id) {
