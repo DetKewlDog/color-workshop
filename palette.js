@@ -7,19 +7,30 @@ function getPaletteElement() {
 window.onload = createPalette();
 
 function createPalette(name = "") {
-    let workspace = document.getElementById('workspace');
+    let workspace = document.querySelector("#workspace");
     let pal = document.createElement("section");
     palName = pal.id = (name == "" ? `p${++palIndex}` : name);
     pal.style.height = "66px";
-    let addpal = document.getElementById("addpal");
+    let addpal = document.querySelector("#addpal");
     workspace.insertBefore(pal, addpal);
     drawPalette();
     changePal(palName);
+    if (Object.keys(p_dict).length >= 5) {
+        addpal.style.display = "none";
+    }
 }
 
 function changePal(pName) {
     palName = pName;
     if (!(palName in p_dict)) p_dict[palName] = [];
+}
+
+function removePalette() {
+    delete p_dict[palName];
+    getPaletteElement().remove();
+    if (Object.keys(p_dict).length < 5) {
+        document.querySelector("#addpal").style.removeProperty("display");
+    }
 }
 
 function addEmptyBtn(isRight) {
@@ -32,10 +43,8 @@ function addEmptyBtn(isRight) {
         add(isRight)
     } );
     btn.addEventListener('contextmenu', (ev) => {
-        if (ev.shiftKey || p_dict[palName].length == 0) {
-            delete p_dict[palName];
-            getPaletteElement().remove();
-        }
+        changePal(ev.target.parentElement.id);
+        if (ev.shiftKey || p_dict[palName].length == 0) removePalette();
         palName = Object.keys(p_dict)[0];
         ev.preventDefault();
     } );
@@ -56,11 +65,9 @@ function addColorBtn(color, index) {
     btn.value = color;
     btn.addEventListener('change', () => modify(index) );
     btn.addEventListener('contextmenu', (ev) => {
+        changePal(p);
         remove(index);
-        if (ev.shiftKey) {
-            delete p_dict[palName];
-            getPaletteElement().remove();
-        }
+        if (ev.shiftKey) removePalette();
         ev.preventDefault();
     } );
     var p = palName;

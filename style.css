@@ -3,9 +3,10 @@ body {
     color: white;
     user-select:none;
     font-family: "Cutive", sans-serif;
+    margin:0;
     user-select: none; /* CSS3 (little to no support) */
     -ms-user-select: none; /* IE 10+ */
-   -moz-user-select: none; /* Gecko (Firefox) */
+    -moz-user-select: none; /* Gecko (Firefox) */
     -webkit-user-select: none; /* Webkit (Safari, Chrome) */
 }
 h1 {
@@ -67,5 +68,4 @@ input[type="color"]::-webkit-color-swatch {
 
 .text-small {
     color:#B8B8B8;
-    margin:0;
 }
