@@ -14,16 +14,23 @@
     </div>
 
     <div style="display:flex; width:100%; margin-top: 5%;">
-        <div class="text-small">Image Manipulation (soon™)</div>
+        <div class="text-small">
+            Image Manipulation (soon™)
+        </div>
 
         <div id="workspace" style="width: 50%;">
             <button id="addpal" class="btn-pal new" oncontextmenu="return false;" onclick="createPalette()">▼</button>
         </div>
 
-        <div class="text-small">Color Manipulation (soon™)</div>
+        <div class="text-small">
+            <section id="inputs" style="height: 66px"></section>
+            <button id="btnColor">Calculate</button>
+            <section id="outputs" style="height: 66px"></section>
+        </div>
     </div>
 
     <script src="palette.js"></script>
+    <script src="operation.js"></script>
 
     <footer>
         <p class="text-small">Swap ᴄᴛʀʟ ・ Clone ᴀʟᴛ ・ Delete 🖱ʀᴍʙ ・ Palette ⇧sʜɪғᴛ</p>
