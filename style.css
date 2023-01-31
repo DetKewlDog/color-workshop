@@ -78,3 +78,12 @@ input[type="color"]::-webkit-color-swatch {
 .text-small {
     color:#B8B8B8;
 }
+
+.arrow {
+    background-color:#2E2E36;
+    font-size: 54px;
+    color:#4A4A52;
+    vertical-align: middle;
+    border: none;
+    margin-top: -54px;
+}

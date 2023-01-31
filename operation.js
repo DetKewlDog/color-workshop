@@ -1,19 +1,36 @@
 class Operation {
+    Type = {
+        INPUT: 0,
+        OUTPUT: 1
+    }
+
     constructor(inputCount, outputCount) {
-        console.log(inputCount, outputCount);
         this.inputs = Array(inputCount).fill('#000000');
         this.outputs = Array(outputCount).fill('#000000');
 
         this.iElement = document.querySelector("#inputs");
         this.iElement.innerText = '';
-        this.inputs.forEach((color, index) => this.addColor(this.iElement, this.inputs, index));
+        this.inputs.forEach((color, index) => { 
+            this.addColor(this.Type.INPUT, index) 
+            if (index + 1 != this.inputs.length) this.addArrow(this.iElement);
+        });
 
         this.oElement = document.querySelector("#outputs");
         this.oElement.innerText = '';
-        this.outputs.forEach((color, index) => this.addColor(this.oElement, this.outputs, index));
+        this.outputs.forEach((color, index) => {
+            this.addColor(this.Type.OUTPUT, index);
+            if (index + 1 != this.outputs.length) this.addArrow(this.oElement);
+        });
     }
 
-    addColor(element, list, index) {
+    addArrow(element) {
+        let arrow = document.createElement("button");
+        arrow.classList.add("arrow");
+        arrow.innerText = '⇨';
+        element.appendChild(arrow);
+    }
+
+    addColor(type, index) {
         let btn = document.createElement("input");
         btn.classList.add("btn-pal");
         btn.classList.add("color");
@@ -21,59 +38,45 @@ class Operation {
         btn.addEventListener('dragover', setDraggedOver);
         btn.addEventListener('drop', applyDrag);
         btn.addEventListener('change', () => {
-            list[index] = this.value;
-            if (list == this.inputs) {
-                this.calculate(this.inputs, this.outputs, this.doOperation);
-            }
+            if (type == this.Type.INPUT) this.calculate();
         });
         btn.type = "color";
         btn.id = index;
         btn.value = '#000000';
-        element.appendChild(btn);
+        (type == this.Type.INPUT ? this.iElement : this.oElement).appendChild(btn);
     }
 
-    calculate(inputs, outputs, func) {
-        this.inputs = inputs;
-        this.outputs = outputs;
-        console.log(this.inputs, this.outputs);
-        var iArr = [];
-        this.inputs.forEach((color, index) => {
-            iArr[index] = hexToRgb(color);
-        });
-        if (iArr.some(x => x == null)) return;
-        var oArr = this.doOperation(iArr);
-        console.log(oArr);
-        oArr.forEach((color, index) => {
-            this.outputs[index] = rgbToHex(color.r, color.g, color.b);
-        });
+    calculate() {
+        this.inputs = this.inputs.map((i) => hexToRgb(i));
+        if (this.inputs.some(x => x == null)) return;
+        this.outputs = this.doOperation(this.inputs);
+        this.outputs = this.outputs.map((i) => rgbToHex(i));
+
+        var o = Array.from(this.oElement.children).filter(element => element.tagName == "INPUT");
         this.outputs.forEach((color, index) => {
-            this.oElement.children[index].value = this.outputs[index];
+            o[index].value = color;
         });
     }
 
-    doOperation(i) {
-        return this.outputs;
-    }
+    doOperation(i) { return []; }
 }
 
 class AverageColor extends Operation {
-    constructor() {
-        super(2, 1);
+    constructor() { super(2, 1); }
+
+    calculate() {
+        this.inputs = Array.from(this.iElement.children)
+            .filter(i => i.tagName == "INPUT")
+            .map(i => i.value);
+        super.calculate();
     }
-    calculate(inputs, outputs, func) {
-        inputs.forEach((x, index) => {
-            inputs[index] = this.inputs[index] = this.iElement.children[index].value;
-        });
-        super.calculate(this.inputs, this.outputs, this.doOperation);
-    }
+
     doOperation(i) {
-        var res = [{
-            r: avg(i[0].r, i[1].r),
-            g: avg(i[0].g, i[1].g),
-            b: avg(i[0].b, i[1].b)
+        return [{
+            r: Math.floor((i[0].r + i[1].r) / 2),
+            g: Math.floor((i[0].g + i[1].g) / 2),
+            b: Math.floor((i[0].b + i[1].b) / 2),
         }];
-        console.log(res);
-        return res;
     }
 }
 

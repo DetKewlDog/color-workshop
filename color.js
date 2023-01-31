@@ -7,25 +7,6 @@ function hexToRgb(hex) {
     } : null;
 }
 
-function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-}
-
-function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-const avg = (x, y) => Math.floor((x + y) / 2);
-
-function avgColor() {
-    let c1 = hexToRgb(document.getElementById("c_a").value);
-    let c2 = hexToRgb(document.getElementById("c_b").value);
-    if (c1 == null || c2 == null) return;
-    let res = {
-        r: avg(c1.r, c2.r),
-        g: avg(c1.g, c2.g),
-        b: avg(c1.b, c2.b)
-    }
-    document.getElementById("c_res").value = rgbToHex(res.r, res.g, res.b);
+function rgbToHex(obj) {
+    return '#' + Object.values(obj).map(item => item.toString(16).padStart(2, '0')).join('');
 }
