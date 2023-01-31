@@ -8,26 +8,27 @@
     <script src="color.js"></script>
 </head>
 <body>
-    <div style="text-align: center; width: 100%;">
-        <h1>🎨 Color Workshop 🎨</h1>
-        <p>by DetKewlDog</p>
-    </div>
-
-    <div style="display:flex; width:100%; margin-top: 5%;">
-        <div class="text-small">
-            Image Manipulation (soon™)
+    <section style="display:flex; width:100%;height: 100vh;">
+        <div class="text-small" style="background-color:#2E2E36;">
+            <h1 style="margin-top: 15%;">Image Operations (soon™)</h1><br>
         </div>
 
         <div id="workspace" style="width: 50%;">
+            <div style="text-align: center; width: 100%;">
+                <h2>🎨 Color Workshop 🎨</h2>
+                <p>by DetKewlDog</p>
+            </div>
             <button id="addpal" class="btn-pal new" oncontextmenu="return false;" onclick="createPalette()">▼</button>
         </div>
 
-        <div class="text-small">
+        <div class="text-small" style="background-color:#2E2E36;">
+            <h1 style="margin-top: 15%;">Color Operations</h1><br>
+            <p>Inputs</p>
             <section id="inputs" style="height: 66px"></section>
-            <button id="btnColor">Calculate</button>
+            <p>Outputs</p>
             <section id="outputs" style="height: 66px"></section>
         </div>
-    </div>
+    </section>
 
     <script src="palette.js"></script>
     <script src="operation.js"></script>

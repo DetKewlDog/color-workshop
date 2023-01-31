@@ -1,9 +1,8 @@
 class Operation {
     constructor(inputCount, outputCount) {
         console.log(inputCount, outputCount);
-        this.inputs = Array(inputCount).fill('#000000')
-        this.outputs = Array(outputCount).fill('#000000')
-        console.log(this.inputs, this.outputs);
+        this.inputs = Array(inputCount).fill('#000000');
+        this.outputs = Array(outputCount).fill('#000000');
 
         this.iElement = document.querySelector("#inputs");
         this.iElement.innerText = '';
@@ -12,9 +11,6 @@ class Operation {
         this.oElement = document.querySelector("#outputs");
         this.oElement.innerText = '';
         this.outputs.forEach((color, index) => this.addColor(this.oElement, this.outputs, index));
-
-        this.btn = document.querySelector("#btnColor");
-        this.btn.addEventListener('click', () => this.calculate(this.inputs, this.outputs, this.doOperation));
     }
 
     addColor(element, list, index) {
@@ -26,6 +22,9 @@ class Operation {
         btn.addEventListener('drop', applyDrag);
         btn.addEventListener('change', () => {
             list[index] = this.value;
+            if (list == this.inputs) {
+                this.calculate(this.inputs, this.outputs, this.doOperation);
+            }
         });
         btn.type = "color";
         btn.id = index;
@@ -59,15 +58,12 @@ class Operation {
 
 class AverageColor extends Operation {
     constructor() {
-        console.log("test");
         super(2, 1);
-        console.log(this.inputs, this.outputs);
     }
     calculate(inputs, outputs, func) {
         inputs.forEach((x, index) => {
             inputs[index] = this.inputs[index] = this.iElement.children[index].value;
         });
-        console.log("1", inputs);
         super.calculate(this.inputs, this.outputs, this.doOperation);
     }
     doOperation(i) {
