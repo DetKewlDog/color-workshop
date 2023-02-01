@@ -144,6 +144,7 @@ function applyDrag (e) {
     var p1 = parent1, p2 = parent2;
     // move between palettes
     if (p1 != p2) {
+        if (p_dict[p1].length == 10 || p_dict[p2].length == 10) return;
         // swap
         if (e.ctrlKey) {
             var temp = p_dict[p1][dragging];

@@ -27,6 +27,7 @@ class Operation {
         let arrow = document.createElement("button");
         arrow.classList.add("arrow");
         arrow.innerText = '⇨';
+        arrow.setAttribute('disabled', '');
         element.appendChild(arrow);
     }
 
