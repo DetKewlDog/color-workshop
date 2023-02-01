@@ -41,7 +41,12 @@
         </div>
 
         <div class="text-small" style="background-color:#2E2E36;">
-            <h1 style="margin-top: 15%;">Color Operations</h1><br>
+            <select id="color-op" onchange="changeColorOp()">
+                <option value="avg">Average</option>
+                <option value="dis">Distance</option>
+                <option value="gra">Grayscale</option>
+                <option value="inv">Invert</option>
+            </select>
             <p>Inputs</p>
             <section id="inputs" style="height: 66px"></section>
             <p>Outputs</p>

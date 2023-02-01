@@ -98,7 +98,7 @@ function setDragging (e) {
 function setDraggedOver(e) {
     e.preventDefault();
     draggedOver = e.target.id;
-    parent2 = palName;
+    parent2 = e.target.parentElement.parentElement.id;
 }
 
 function dragPalette(e) {
@@ -142,7 +142,6 @@ function dragPalette(e) {
 
 function applyDrag (e) {
     var p1 = parent1, p2 = parent2;
-    console.log(p1, p2);
     // move between palettes
     if (p1 != p2) {
         // swap
@@ -158,7 +157,10 @@ function applyDrag (e) {
         }
         // move
         else {
-            p_dict[p2].splice(draggedOver, 0, p_dict[p1][dragging]);
+            p_dict[p2].splice(draggedOver, 0, (dragging.startsWith('i') ?
+                document.querySelector(`#${dragging}`).value :
+                p_dict[p1][dragging])
+            );
             remove(dragging);
         }
         changePal(p1);
@@ -192,7 +194,6 @@ function add(isRight) {
 
 function modify(id) {
     p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + 1].children[1].value;
-    console.log(p_dict[palName]);
 }
 
 function remove(id) {

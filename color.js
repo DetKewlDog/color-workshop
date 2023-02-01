@@ -8,5 +8,8 @@ function hexToRgb(hex) {
 }
 
 function rgbToHex(obj) {
-    return '#' + Object.values(obj).map(item => item.toString(16).padStart(2, '0')).join('');
+    return '#' + Object.values(obj).map(i =>
+        (i >= 0 ? (i <= 255 ? i : 255) : 0)
+        .toString(16).padStart(2, '0')
+    ).join('');
 }

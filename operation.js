@@ -32,30 +32,35 @@ class Operation {
 
     addColor(type, index) {
         let btn = document.createElement("input");
-        btn.classList.add("btn-pal");
-        btn.classList.add("color");
+        btn.classList.add("coloris");
         btn.draggable = true;
-        btn.addEventListener('dragover', setDraggedOver);
+        btn.addEventListener('dragging', setDragging);
         btn.addEventListener('drop', applyDrag);
         btn.addEventListener('change', () => {
             if (type == this.Type.INPUT) this.calculate();
         });
-        btn.type = "color";
-        btn.id = index;
+        btn.setAttribute('data-coloris', '');
+        btn.id = `${type == this.Type.INPUT ? 'i' : 'o'}${index}`;
         btn.value = '#000000';
         (type == this.Type.INPUT ? this.iElement : this.oElement).appendChild(btn);
+        reloadPickers();
     }
 
     calculate() {
-        this.inputs = this.inputs.map((i) => hexToRgb(i));
+        this.inputs = Array.from(this.iElement.children)
+            .filter(i => i.tagName == "DIV")
+            .map(i => hexToRgb(i.children[1].value));
         if (this.inputs.some(x => x == null)) return;
         this.outputs = this.doOperation(this.inputs);
         this.outputs = this.outputs.map((i) => rgbToHex(i));
 
-        var o = Array.from(this.oElement.children).filter(element => element.tagName == "INPUT");
+        var o = Array.from(this.oElement.children)
+            .filter(element => element.tagName == "DIV")
+            .map(element => element.children[1]);
         this.outputs.forEach((color, index) => {
             o[index].value = color;
         });
+        reloadPickers();
     }
 
     doOperation(i) { return []; }
@@ -63,13 +68,6 @@ class Operation {
 
 class AverageColor extends Operation {
     constructor() { super(2, 1); }
-
-    calculate() {
-        this.inputs = Array.from(this.iElement.children)
-            .filter(i => i.tagName == "INPUT")
-            .map(i => i.value);
-        super.calculate();
-    }
 
     doOperation(i) {
         return [{
@@ -80,4 +78,53 @@ class AverageColor extends Operation {
     }
 }
 
-var _avg = new AverageColor();
+class ColorDistance extends Operation {
+    constructor() { super(3, 1); }
+
+    doOperation(i) {
+        return [{
+            r: i[2].r - i[0].r + i[1].r,
+            g: i[2].g - i[0].g + i[1].g,
+            b: i[2].b - i[0].b + i[1].b,
+        }];
+    }
+}
+
+class Grayscale extends Operation {
+    constructor() { super(1, 1); }
+
+    doOperation(i) {
+        var x = Math.floor((i[0].r + i[0].g + i[0].b) / 3);
+        return [{
+            r: x,
+            g: x,
+            b: x,
+        }];
+    }
+}
+
+class Invert extends Operation {
+    constructor() { super(1, 1); }
+
+    doOperation(i) {
+        return [{
+            r: 255 - i[0].r,
+            g: 255 - i[0].g,
+            b: 255 - i[0].b,
+        }];
+    }
+}
+
+let colorOp = new AverageColor();
+
+const op_dict = {
+    "avg": AverageColor,
+    "dis": ColorDistance,
+    "gra": Grayscale,
+    "inv": Invert,
+} ;
+
+function changeColorOp() {
+    console.log(op_dict[document.querySelector("#color-op").value]);
+    colorOp = new op_dict[document.querySelector("#color-op").value]();
+}
