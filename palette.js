@@ -142,6 +142,26 @@ function dragPalette(e) {
 
 function applyDrag (e) {
     var p1 = parent1, p2 = parent2;
+    // color output to palette
+    if (dragging.startsWith('o') || dragging.startsWith('i')) {
+        var c = document.querySelector('#' + dragging).value;
+        if (e.altKey || e.ctrlKey) {
+            p_dict[p2][draggedOver] = c;
+        }
+        else {
+            p_dict[p2].splice(draggedOver, 0, c);
+        }
+        changePal(p2);
+        drawPalette();
+        return;
+    }
+    // palette to color input
+    if (draggedOver.startsWith('i')) {
+        var c = document.querySelector('#' + draggedOver);
+        c.value = p_dict[p1][dragging];
+        c.dispatchEvent(new Event('input', { bubbles: true }));
+        return;
+    }
     // move between palettes
     if (p1 != p2) {
         if (p_dict[p1].length == 10 || p_dict[p2].length == 10) return;
@@ -158,10 +178,7 @@ function applyDrag (e) {
         }
         // move
         else {
-            p_dict[p2].splice(draggedOver, 0, (dragging.startsWith('i') ?
-                document.querySelector(`#${dragging}`).value :
-                p_dict[p1][dragging])
-            );
+            p_dict[p2].splice(draggedOver, 0, p_dict[p1][dragging]);
             remove(dragging);
         }
         changePal(p1);

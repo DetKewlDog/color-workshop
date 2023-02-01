@@ -34,8 +34,12 @@ class Operation {
         let btn = document.createElement("input");
         btn.classList.add("coloris");
         btn.draggable = true;
-        btn.addEventListener('dragging', setDragging);
-        btn.addEventListener('drop', applyDrag);
+        if (type == this.Type.INPUT) btn.addEventListener('dragover', setDraggedOver);
+        btn.addEventListener('drag', setDragging); 
+        btn.addEventListener('drop', () => {
+            applyDrag();
+            if (type == this.Type.INPUT) this.calculate();
+        });
         btn.addEventListener('change', () => {
             if (type == this.Type.INPUT) this.calculate();
         });
@@ -59,6 +63,7 @@ class Operation {
             .map(element => element.children[1]);
         this.outputs.forEach((color, index) => {
             o[index].value = color;
+            o[index].dispatchEvent(new Event('input', { bubbles: true }));
         });
         reloadPickers();
     }
