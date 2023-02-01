@@ -54,15 +54,14 @@ function addEmptyBtn(isRight) {
 
 function addColorBtn(color, index) {
     let btn = document.createElement("input");
-    btn.classList.add("btn-pal");
-    btn.classList.add("color");
+    btn.classList.add("coloris");
     btn.draggable = true;
     btn.addEventListener('drag', setDragging);
     btn.addEventListener('dragover', setDraggedOver);
     btn.addEventListener('drop', applyDrag);
-    btn.type = "color";
-    btn.id = index;
     btn.value = color;
+    btn.id = index;
+    btn.setAttribute('data-coloris', '');
     btn.addEventListener('change', () => modify(index) );
     btn.addEventListener('contextmenu', (ev) => {
         changePal(p);
@@ -75,6 +74,7 @@ function addColorBtn(color, index) {
         changePal(p);
     } );
     getPaletteElement().appendChild(btn);
+    reloadPickers();
 }
 
 function drawPalette() {
@@ -87,17 +87,18 @@ function drawPalette() {
     if (p_dict[palName] == null || p_dict[palName].length < 10) addEmptyBtn(0);
     p_dict[palName]?.forEach((color, index) => addColorBtn(color, index));
     if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < 10) addEmptyBtn(1)
+    reloadPickers();
 }
 
 function setDragging (e) { 
     dragging = e.target.id; 
-    parent1 = e.target.parentElement;
+    parent1 = palName;
 } 
 
 function setDraggedOver(e) {
     e.preventDefault();
     draggedOver = e.target.id;
-    parent2 = e.target.parentElement;
+    parent2 = palName;
 }
 
 function dragPalette(e) {
@@ -140,7 +141,8 @@ function dragPalette(e) {
 }
 
 function applyDrag (e) {
-    var p1 = parent1.id, p2 = parent2.id;
+    var p1 = parent1, p2 = parent2;
+    console.log(p1, p2);
     // move between palettes
     if (p1 != p2) {
         if (p_dict[p1].length == 10 || p_dict[p2].length == 10) return;
@@ -190,10 +192,21 @@ function add(isRight) {
 }
 
 function modify(id) {
-    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + 1].value;
+    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + 1].children[1].value;
+    console.log(p_dict[palName]);
 }
 
 function remove(id) {
     p_dict[palName].splice(id, 1);
     drawPalette();
+}
+
+function reloadPickers() {
+    Coloris({
+        el: '.coloris',
+        theme: 'polaroid',
+        defaultColor: '#000000',
+        alpha: false,
+        themeMode: 'dark'
+    });
 }
