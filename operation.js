@@ -27,6 +27,7 @@ class Operation {
         let arrow = document.createElement("button");
         arrow.classList.add("arrow");
         arrow.innerText = '⇨';
+        arrow.setAttribute('disabled', '');
         element.appendChild(arrow);
     }
 
@@ -37,9 +38,7 @@ class Operation {
         btn.draggable = true;
         btn.addEventListener('dragover', setDraggedOver);
         btn.addEventListener('drop', applyDrag);
-        btn.addEventListener('change', () => {
-            if (type == this.Type.INPUT) this.calculate();
-        });
+        btn.addEventListener('change', () => this.calculate());
         btn.type = "color";
         btn.id = index;
         btn.value = '#000000';
@@ -47,7 +46,9 @@ class Operation {
     }
 
     calculate() {
-        this.inputs = this.inputs.map((i) => hexToRgb(i));
+        this.inputs = Array.from(this.iElement.children)
+            .filter(i => i.tagName == "INPUT")
+            .map(i => hexToRgb(i.value));
         if (this.inputs.some(x => x == null)) return;
         this.outputs = this.doOperation(this.inputs);
         this.outputs = this.outputs.map((i) => rgbToHex(i));
@@ -64,13 +65,6 @@ class Operation {
 class AverageColor extends Operation {
     constructor() { super(2, 1); }
 
-    calculate() {
-        this.inputs = Array.from(this.iElement.children)
-            .filter(i => i.tagName == "INPUT")
-            .map(i => i.value);
-        super.calculate();
-    }
-
     doOperation(i) {
         return [{
             r: Math.floor((i[0].r + i[1].r) / 2),
@@ -80,4 +74,53 @@ class AverageColor extends Operation {
     }
 }
 
-var _avg = new AverageColor();
+class ColorDistance extends Operation {
+    constructor() { super(3, 1); }
+
+    doOperation(i) {
+        return [{
+            r: i[2].r - i[0].r + i[1].r,
+            g: i[2].g - i[0].g + i[1].g,
+            b: i[2].b - i[0].b + i[1].b,
+        }];
+    }
+}
+
+class Grayscale extends Operation {
+    constructor() { super(1, 1); }
+
+    doOperation(i) {
+        var x = Math.floor((i[0].r + i[0].g + i[0].b) / 3);
+        return [{
+            r: x,
+            g: x,
+            b: x,
+        }];
+    }
+}
+
+class Invert extends Operation {
+    constructor() { super(1, 1); }
+
+    doOperation(i) {
+        return [{
+            r: 255 - i[0].r,
+            g: 255 - i[0].g,
+            b: 255 - i[0].b,
+        }];
+    }
+}
+
+let colorOp = new AverageColor();
+
+const op_dict = {
+    "avg": AverageColor,
+    "dis": ColorDistance,
+    "gra": Grayscale,
+    "inv": Invert,
+} ;
+
+function changeColorOp() {
+    console.log(op_dict[document.querySelector("#color-op").value]);
+    colorOp = new op_dict[document.querySelector("#color-op").value]();
+}
