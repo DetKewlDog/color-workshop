@@ -33,7 +33,7 @@ function removePalette() {
     }
 }
 
-function addEmptyBtn(isRight) {
+function addPlusBtn(isRight) {
     let btn = document.createElement("button");
     btn.classList.add("btn-pal");
     btn.classList.add("new");
@@ -48,7 +48,18 @@ function addEmptyBtn(isRight) {
         palName = Object.keys(p_dict)[0];
         ev.preventDefault();
     } );
+    btn.addEventListener('dragover', setDraggedOver);
+    btn.addEventListener('drop', (e) => {
+        var p1 = parent1, p2 = e.target.parentElement.id;
+        dragColorOp = dragging.startsWith('o') || dragging.startsWith('i');
+        var c = dragColorOp ? document.querySelector('#' + dragging).value : p_dict[p1][dragging];
+        console
+        p_dict[p2].splice(isRight ? p_dict[p2].length : 0, 0, c);
+        changePal(p2);
+        drawPalette();
+    });
     btn.innerText = '+';
+    btn.id = 'add-btn';
     getPaletteElement().appendChild(btn);
 }
 
@@ -84,9 +95,9 @@ function drawPalette() {
     p.addEventListener('drag', setDragging);
     p.addEventListener('dragover', setDraggedOver);
     p.addEventListener('drop', dragPalette);
-    if (p_dict[palName] == null || p_dict[palName].length < 10) addEmptyBtn(0);
+    if (p_dict[palName] == null || p_dict[palName].length < 10) addPlusBtn(0);
     p_dict[palName]?.forEach((color, index) => addColorBtn(color, index));
-    if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < 10) addEmptyBtn(1)
+    if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < 10) addPlusBtn(1)
     reloadPickers();
 }
 
