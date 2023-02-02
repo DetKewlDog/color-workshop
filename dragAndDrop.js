@@ -85,7 +85,7 @@ function dragOutputPalette(e, p) {
     else {
         p_dict[p].splice(draggedOver, 0, c);
     }
-    changePal(p2);
+    changePal(p);
     drawPalette();
 }
 
@@ -95,7 +95,7 @@ function dragPaletteInput(p) {
     c.dispatchEvent(new Event('input', { bubbles: true }));
 }
 
-function dragColor(e, p1, p2) {
+function dragColor(e) {
     // swap
     if (e.ctrlKey) {
         var temp = p_dict[palName][dragging];
@@ -139,5 +139,5 @@ function applyDrag (e) {
         dragBetweenPalettes(e, parent1, parent2);
         return;
     }
-    dragColor();
+    dragColor(e);
 };
