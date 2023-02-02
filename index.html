@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 
     <script src="color.js"></script>
+    <script src="dragAndDrop.js"></script>
     <style>
         .clr-field,
         .clr-field button {
@@ -42,12 +43,16 @@
 
         <div class="text-small" style="background-color:#2E2E36;">
             <h1 style="margin-top: 15%;">Color Operations</h1><br>
-            <select id="color-op" onchange="changeColorOp()">
-                <option value="avg">Average</option>
-                <option value="dis">Distance</option>
-                <option value="gra">Grayscale</option>
-                <option value="inv">Invert</option>
-            </select>
+            <label>Operation:</label>
+            <div id="color-op" onchange="changeColorOp()" class="dropdown" dropdown>
+                <button id="ddtext" class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <button value="avg">Average</button><br>
+                    <button value="dis">Distance</button><br>
+                    <button value="gra">Grayscale</button><br>
+                    <button value="inv">Invert</button><br>
+                </div>
+            </div>
             <p>Inputs</p>
             <section id="inputs" style="height: 66px"></section>
             <p>Outputs</p>
@@ -57,6 +62,7 @@
 
     <script src="palette.js"></script>
     <script src="operation.js"></script>
+    <script src="dropdown.js"></script>
 
     <footer>
         <p class="text-small">Swap ᴄᴛʀʟ ・ Clone ᴀʟᴛ ・ Delete 🖱ʀᴍʙ ・ Palette ⇧sʜɪғᴛ</p>

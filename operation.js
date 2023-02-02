@@ -130,6 +130,5 @@ const op_dict = {
 } ;
 
 function changeColorOp() {
-    console.log(op_dict[document.querySelector("#color-op").value]);
     colorOp = new op_dict[document.querySelector("#color-op").value]();
 }

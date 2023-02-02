@@ -54,6 +54,9 @@ input[type="color"]::-webkit-color-swatch {
     width: 64px;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+    margin-top:6px;
+    padding-inline: 2px;
     /* margin-top: -54px; */
 }
 .btn-pal.color {
@@ -101,4 +104,71 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 5px;
     background-color: #4A4A52;
     color:#4A4A52;
+    cursor: pointer;
+}
+
+/* Style The Dropdown Button */
+.dropbtn {
+    vertical-align: middle;
+    font-family: "Cutive", sans-serif;
+    background-color: #4A4A52;
+    color: white;
+    font-size: 16px;
+    width: 128px;
+    cursor: pointer;
+    border:none;
+    border-radius: 4px;
+}
+  
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    width: 128px;
+    display: inline-block;
+}
+  
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #383840;
+    width: 125px;
+    z-index: 1;
+    border: 2px solid #4A4A52;
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+  
+/* Links inside the dropdown */
+.dropdown-content button {
+    background-color: #383840;
+    color: #DEDEDE;
+    padding: 6px 16px;
+    text-decoration: none;
+    width: 125px;
+    font-family: "Cutive", sans-serif;
+    border: 2px solid #4A4A52;
+    border-left:none;
+    border-right:none;
+    border-bottom: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+}
+  
+/* Change color of dropdown links on hover */
+.dropdown-content button:hover {
+    background-color: #4A4A52;
+}
+  
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #72727A;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
