@@ -174,7 +174,19 @@ input[type="color"]::-webkit-color-swatch {
     border-bottom-right-radius: 0;
 }
 
-img {
+canvas {
     border: 4px dashed #72727A;
     border-radius: 10%;
+}
+
+.btn {
+    vertical-align: middle;
+    font-family: "Cutive", sans-serif;
+    background-color: #4A4A52;
+    color: white;
+    font-size: 16px;
+    width: 128px;
+    cursor: pointer;
+    border:none;
+    border-radius: 4px;
 }

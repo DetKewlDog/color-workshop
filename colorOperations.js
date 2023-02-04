@@ -1,4 +1,4 @@
-class Operation {
+class ColorOperation {
     Type = {
         INPUT: 0,
         OUTPUT: 1
@@ -71,7 +71,7 @@ class Operation {
     doOperation(i) { return []; }
 }
 
-class AverageColor extends Operation {
+class AverageColor extends ColorOperation {
     constructor() { super(2, 1); }
 
     doOperation(i) {
@@ -83,7 +83,7 @@ class AverageColor extends Operation {
     }
 }
 
-class ColorDistance extends Operation {
+class ColorDistance extends ColorOperation {
     constructor() { super(3, 1); }
 
     doOperation(i) {
@@ -95,7 +95,7 @@ class ColorDistance extends Operation {
     }
 }
 
-class Grayscale extends Operation {
+class Grayscale extends ColorOperation {
     constructor() { super(1, 1); }
 
     doOperation(i) {
@@ -108,7 +108,7 @@ class Grayscale extends Operation {
     }
 }
 
-class Invert extends Operation {
+class Invert extends ColorOperation {
     constructor() { super(1, 1); }
 
     doOperation(i) {

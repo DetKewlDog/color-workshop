@@ -145,8 +145,6 @@ function applyDrag (e) {
 // ----------------------------------------------------------------------------------
 
 function imgDrop(ev) {
-    console.log('File(s) dropped');
-
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
 
@@ -160,8 +158,12 @@ function imgDrop(ev) {
                     var reader = new FileReader();
                     reader.readAsDataURL(file);
                     reader.onloadend = function() {
-                        var img = document.createElement('img')
-                        ev.target.src = reader.result;;
+                        var ctx =  ev.target.getContext("2d");
+                        ctx.imageSmoothingEnabled = false;
+                        var temp = document.createElement('img');
+                        temp.src = reader.result;
+                        ctx.drawImage(temp, 0, 0, 256, 256);
+                        temp.remove();
                     }
                 }
             }
@@ -171,9 +173,6 @@ function imgDrop(ev) {
 
 
 function dragOverHandler(ev) {
-    console.log('File(s) in drop zone');
-
-    // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
 }
 
