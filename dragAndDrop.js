@@ -141,3 +141,42 @@ function applyDrag (e) {
     }
     dragColor(e);
 };
+
+// ----------------------------------------------------------------------------------
+
+function imgDrop(ev) {
+    console.log('File(s) dropped');
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+
+    if (ev.dataTransfer.items) {
+        // Use DataTransferItemList interface to access the file(s)
+        [...ev.dataTransfer.items].forEach((item, i) => {
+            // If dropped items aren't files, reject them
+            if (item.kind === 'file') {
+                const file = item.getAsFile();
+                if (isFileImage(file)) {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onloadend = function() {
+                        var img = document.createElement('img')
+                        ev.target.src = reader.result;;
+                    }
+                }
+            }
+        });
+    }
+}
+
+
+function dragOverHandler(ev) {
+    console.log('File(s) in drop zone');
+
+    // Prevent default behavior (Prevent file from being opened)
+    ev.preventDefault();
+}
+
+function isFileImage(file) {
+    return file && file['type'].split('/')[0] === 'image';
+}

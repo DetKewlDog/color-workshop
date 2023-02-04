@@ -173,3 +173,8 @@ input[type="color"]::-webkit-color-swatch {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+img {
+    border: 4px dashed #72727A;
+    border-radius: 10%;
+}

@@ -30,7 +30,11 @@
 <body>
     <section style="display:flex; width:100%;height: 100vh;">
         <div class="text-small" style="background-color:#2E2E36;">
-            <h1 style="margin-top: 15%;">Image Operations (soon™)</h1><br>
+            <h1 style="margin-top: 15%;">Image Operations</h1><br>
+            <img id="imgdrag" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png?20091205084734"
+                ondragover="dragOverHandler(event);"
+                ondrop="imgDrop(event);"
+                width="256" height="256">
         </div>
 
         <div id="workspace" style="width: 50%;">
