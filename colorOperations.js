@@ -43,6 +43,9 @@ class ColorOperation {
         btn.addEventListener('change', () => {
             if (type == this.Type.INPUT) this.calculate();
         });
+        btn.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        })
         btn.setAttribute('data-coloris', '');
         btn.id = `${type == this.Type.INPUT ? 'i' : 'o'}${index}`;
         btn.value = '#000000';
