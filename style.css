@@ -190,3 +190,14 @@ canvas {
     border:none;
     border-radius: 4px;
 }
+
+.pal-input {
+    font-family: "Cutive", sans-serif;
+    font-size: 16px;
+    color: #DEDEDE;
+    border: 4px dashed #72727A;
+    border-radius: 10%;
+    background-color:#2E2E36;
+    width: 128px;
+    height: 48px;
+}

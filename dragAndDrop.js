@@ -148,29 +148,27 @@ function imgDrop(ev) {
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
 
-    if (ev.dataTransfer.items) {
-        // Use DataTransferItemList interface to access the file(s)
-        [...ev.dataTransfer.items].forEach((item, i) => {
-            // If dropped items aren't files, reject them
-            if (item.kind === 'file') {
-                const file = item.getAsFile();
-                if (isFileImage(file)) {
-                    var reader = new FileReader();
-                    reader.readAsDataURL(file);
-                    reader.onloadend = function() {
-                        var ctx =  ev.target.getContext("2d");
-                        ctx.imageSmoothingEnabled = false;
-                        var temp = document.createElement('img');
-                        temp.src = reader.result;
-                        var canvas = document.querySelector('#image');
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(temp, 0, 0, 256, 256);
-                        temp.remove();
-                    }
-                }
-            }
-        });
-    }
+    if (!ev.dataTransfer.items) return;
+    
+    // Use DataTransferItemList interface to access the file(s)
+    [...ev.dataTransfer.items].forEach((item, i) => {
+        // If dropped items aren't files, reject them
+        if (item.kind !== 'file') return;
+        const file = item.getAsFile();
+        if (!isFileImage(file)) return;
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+            var ctx =  ev.target.getContext("2d");
+            ctx.imageSmoothingEnabled = false;
+            var temp = document.createElement('img');
+            temp.src = reader.result;
+            var canvas = document.querySelector('#image');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(temp, 0, 0, 256, 256);
+            temp.remove();
+        }
+    });
 }
 
 
