@@ -42,7 +42,7 @@ function addPlusBtn(isRight) {
         changePal(p);
         add(isRight)
     } );
-    btn.addEventListener('contextenu', (ev) => {
+    btn.addEventListener('contextmenu', (ev) => {
         changePal(ev.target.parentElement.id);
         if (ev.shiftKey || p_dict[palName].length == 0) removePalette();
         palName = Object.keys(p_dict)[0];

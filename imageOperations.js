@@ -8,6 +8,7 @@ function extractPalette() {
     const data = imgData.data;
 
     for(let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] == 0) continue;
         var c = {
             r: data[i],
             g: data[i + 1],

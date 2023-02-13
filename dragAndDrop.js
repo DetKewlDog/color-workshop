@@ -162,6 +162,8 @@ function imgDrop(ev) {
                         ctx.imageSmoothingEnabled = false;
                         var temp = document.createElement('img');
                         temp.src = reader.result;
+                        var canvas = document.querySelector('#image');
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
                         ctx.drawImage(temp, 0, 0, 256, 256);
                         temp.remove();
                     }
