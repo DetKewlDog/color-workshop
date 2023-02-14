@@ -144,12 +144,13 @@ function applyDrag (e) {
 
 // ----------------------------------------------------------------------------------
 
-var ctx = undefined, image = undefined;
+var context = undefined, opContext = undefined, image = undefined;
 
 function imgDrop(ev) {
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
-    ctx ??= ev.target.getContext('2d');
+    context ??= ev.target.getContext('2d');
+    opContext ??= document.querySelector('#canvas').getContext('2d');
 
     if (!ev.dataTransfer.items) return;
     
@@ -163,7 +164,8 @@ function imgDrop(ev) {
         reader.readAsDataURL(file);
         reader.onloadend = function() {
             image = reader.result;
-            loadImg(image);
+            loadImg(opContext, image, false);
+            loadImg(context, image, true);
         }
     });
 }
@@ -177,21 +179,27 @@ function isFileImage(file) {
     return file && file['type'].split('/')[0] === 'image';
 }
 
-function loadImg(file) {
+function loadImg(ctx, file, resize) {
     ctx.imageSmoothingEnabled = false;
     var img = new Image();
     img.src = file;
     img.onload = function() {
         var canvas = document.querySelector('#image');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        let width, height;
-        if (img.width != 256 && img.width >= img.height) {
-            height = img.height / img.width * 256;
-            width = 256;
+        let width = img.width, height = img.height;
+        if (resize) {
+            if (img.width != 256 && img.width >= img.height) {
+                height = img.height / img.width * 256;
+                width = 256;
+            }
+            else if (img.height != 256) {
+                width = img.width / img.height * 256;
+                height = 256;
+            }
         }
-        else if (img.height != 256) {
-            width = img.width / img.height * 256;
-            height = 256;
+        else {
+            ctx.width = img.width;
+            ctx.height = img.height;
         }
         ctx.drawImage(img, 0, 0, width.toFixed(0), height.toFixed(0));
     }

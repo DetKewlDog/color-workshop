@@ -2,7 +2,7 @@ var colors;
 
 function extractPalette() {
     colors = new Set();
-    var canvas = document.querySelector('#image');
+    var canvas = document.querySelector('#canvas');
     ctx = canvas.getContext("2d");
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imgData.data;
