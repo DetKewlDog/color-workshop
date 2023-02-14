@@ -20,7 +20,7 @@ function extractPalette() {
     var pals = colors.length / 10 + colors.length % 10;
     if (p_dict.length + pals > 5) return;
     for (var i = 0; i < colors.length; i++) {
-        if (i % 10 == 0) {
+        if (i % 10 == 0 && i != 0) {
             drawPalette();
             createPalette();
         }

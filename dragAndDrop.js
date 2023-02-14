@@ -144,9 +144,12 @@ function applyDrag (e) {
 
 // ----------------------------------------------------------------------------------
 
+var ctx = undefined, image = undefined;
+
 function imgDrop(ev) {
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
+    ctx ??= ev.target.getContext('2d');
 
     if (!ev.dataTransfer.items) return;
     
@@ -159,14 +162,8 @@ function imgDrop(ev) {
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function() {
-            var ctx =  ev.target.getContext("2d");
-            ctx.imageSmoothingEnabled = false;
-            var temp = document.createElement('img');
-            temp.src = reader.result;
-            var canvas = document.querySelector('#image');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(temp, 0, 0, 256, 256);
-            temp.remove();
+            image = reader.result;
+            loadImg(image);
         }
     });
 }
@@ -178,4 +175,24 @@ function dragOverHandler(ev) {
 
 function isFileImage(file) {
     return file && file['type'].split('/')[0] === 'image';
+}
+
+function loadImg(file) {
+    ctx.imageSmoothingEnabled = false;
+    var img = new Image();
+    img.src = file;
+    img.onload = function() {
+        var canvas = document.querySelector('#image');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let width, height;
+        if (img.width != 256 && img.width >= img.height) {
+            height = img.height / img.width * 256;
+            width = 256;
+        }
+        else if (img.height != 256) {
+            width = img.width / img.height * 256;
+            height = 256;
+        }
+        ctx.drawImage(img, 0, 0, width.toFixed(0), height.toFixed(0));
+    }
 }
