@@ -18,9 +18,9 @@ function dragPalette(e) {
         p_dict[draggedOver] = temp;
     }
     // copy
-    else if (e.altKey) {
-        p_dict[draggedOver] = p_dict[dragging];
-    }
+    // else if (e.altKey) {
+    //     p_dict[draggedOver] = p_dict[dragging];
+    // }
     // move
     else {
         var keys = Object.keys(p_dict), values = Object.values(p_dict);
@@ -155,6 +155,7 @@ function dragToPalInput(e) {
         pal = newPal;
         name = "new-pal";
     }
+    localStorage.removeItem(document.querySelector('#' + name).style.background);
     updatePaletteImg(pal, name);
 }
 
@@ -180,6 +181,7 @@ function imgDrop(ev) {
         reader.readAsDataURL(file);
         reader.onloadend = function() {
             image = reader.result;
+            console.log(image);
             loadImg(opContext, image, false);
             loadImg(context, image, true);
         }
@@ -200,7 +202,7 @@ function loadImg(ctx, file, resize) {
     var img = new Image();
     img.src = file;
     img.onload = function() {
-        var canvas = document.querySelector('#image');
+        var canvas = document.querySelector((resize ? '#image' : '#canvas'));
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let width = img.width, height = img.height;
         if (resize) {
@@ -214,8 +216,8 @@ function loadImg(ctx, file, resize) {
             }
         }
         else {
-            ctx.width = img.width;
-            ctx.height = img.height;
+            canvas.width = ctx.width = img.width;
+            canvas.height = ctx.height = img.height;
         }
         ctx.drawImage(img, 0, 0, width.toFixed(0), height.toFixed(0));
     }
