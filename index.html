@@ -39,9 +39,9 @@
                 width="256" height="256">
             </canvas><br>
             <button class="btn" onclick="extractPalette()" style="width:160px">Extract Palette</button><br>
-            <button class="pal-input">Ref pal</button>
+            <button id="ref-pal" class="pal-input" ondragover="setDraggedOver(event)" ondrop="dragToPalInput(event)">Ref pal</button>
             <button class="arrow" style="margin-top: 0%;">⇨</button>
-            <button class="pal-input">New pal</button>
+            <button id="new-pal" class="pal-input" ondragover="setDraggedOver(event)" ondrop="dragToPalInput(event)">New pal</button>
         </div>
 
         <div id="workspace" style="width: 50%;">

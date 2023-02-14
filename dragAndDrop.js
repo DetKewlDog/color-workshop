@@ -142,6 +142,22 @@ function applyDrag (e) {
     dragColor(e);
 };
 
+function dragToPalInput(e) {
+    e.preventDefault();
+    if (!parent1.startsWith('p')) return;
+    let pal = undefined, name = undefined;
+    if (draggedOver == "ref-pal") {
+        refPal = p_dict[parent1];
+        pal = refPal;
+        name = "ref-pal";
+    } else if (draggedOver == "new-pal") {
+        newPal = p_dict[parent1];
+        pal = newPal;
+        name = "new-pal";
+    }
+    updatePaletteImg(pal, name);
+}
+
 // ----------------------------------------------------------------------------------
 
 var context = undefined, opContext = undefined, image = undefined;
