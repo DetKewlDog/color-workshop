@@ -40,6 +40,9 @@ class ColorOperation {
             applyDrag();
             if (type == this.Type.INPUT) this.calculate();
         });
+        btn.addEventListener('coloris:pick', () => {
+            if (type == this.Type.INPUT) this.calculate();
+        });
         btn.addEventListener('change', () => {
             if (type == this.Type.INPUT) this.calculate();
         });

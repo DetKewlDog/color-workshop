@@ -181,7 +181,6 @@ function imgDrop(ev) {
         reader.readAsDataURL(file);
         reader.onloadend = function() {
             image = reader.result;
-            console.log(image);
             loadImg(opContext, image, false);
             loadImg(context, image, true);
         }

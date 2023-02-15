@@ -73,6 +73,7 @@ function addColorBtn(color, index) {
     btn.value = color;
     btn.id = index;
     btn.setAttribute('data-coloris', '');
+    btn.addEventListener('coloris:pick', () => modify(index) );
     btn.addEventListener('change', () => modify(index) );
     btn.addEventListener('contextmenu', (ev) => {
         changePal(p);
