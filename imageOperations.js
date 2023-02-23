@@ -1,5 +1,7 @@
 var refPal = undefined, newPal = undefined;
 
+var filename = undefined;
+
 function updatePaletteImg(pal, btnName) {
     let canvas = document.querySelector('#color-canvas');
     let ctx = canvas.getContext("2d");
@@ -44,13 +46,10 @@ function applyPalette() {
             }
         );
     }
-    console.log(newColors);
     newColors.forEach(color => {
         ctx.fillStyle = color.color;
         ctx.fillRect(color.pos.x, color.pos.y, 1, 1);
     })
-    image = canvas.toDataURL();
-    console.log(canvas.toDataURL());
     loadImg(document.querySelector('#image').getContext('2d'), canvas.toDataURL(), true);
 }
 
@@ -81,4 +80,11 @@ function extractPalette() {
         p_dict[palName].push(colors[i]);
     }
     drawPalette();
+}
+
+function saveImage(e) {
+    let link = document.createElement("a");
+    link.download = filename;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
 }

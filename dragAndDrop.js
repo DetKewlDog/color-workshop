@@ -177,6 +177,7 @@ function imgDrop(ev) {
         if (item.kind !== 'file') return;
         const file = item.getAsFile();
         if (!isFileImage(file)) return;
+        filename = file['name'];
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function() {
