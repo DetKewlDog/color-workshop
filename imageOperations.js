@@ -90,9 +90,22 @@ function extractPalette() {
     drawPalette();
 }
 
-function saveImage(e) {
-    let link = document.createElement("a");
-    link.download = filename;
-    link.href = canvas.toDataURL("image/png");
-    link.click();
+async function saveImage(e) {
+    if (filename == undefined) return;
+    const handle = await showSaveFilePicker({
+        suggestedName: filename,
+        types: [{
+            description: 'PNG',
+            accept: {'image/png': ['.png']},
+        }],
+    });
+    const blob = await fetch(
+        canvas.toDataURL("image/png")
+    ).then((response) => 
+        response.blob()
+    );
+
+    const writableStream = await handle.createWritable();
+    await writableStream.write(blob);
+    await writableStream.close();
 }
