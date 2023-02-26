@@ -77,7 +77,7 @@ function extractPalette() {
         B = (B.r + B.g + B.b) / 3;
         return A - B;
     });
-    var pals = Math.floor(colors.length / 10) + (colors.length % 10 == 0 ? 1 : 0);
+    var pals = (colors.length / 10 | 0) + (colors.length % 10 == 0 ? 1 : 0);
     if (Object.keys(p_dict).length + pals >= 5) return;
     for (var i = 0; i < colors.length; i++) {
         if (i == 0 && (Object.keys(p_dict).length == 0 || p_dict[palName].length != 0)) createPalette();
@@ -88,6 +88,27 @@ function extractPalette() {
         p_dict[palName].push(colors[i]);
     }
     drawPalette();
+}
+
+async function loadImage(e) {
+    context ??= document.querySelector('#image').getContext('2d');
+    opContext ??= document.querySelector('#canvas').getContext('2d');
+
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = _ => {
+        let file = Array.from(input.files)[0];
+        if (!isFileImage(file)) return;
+        filename = file['name'];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function() {
+            image = reader.result;
+            loadImg(opContext, image, false);
+            loadImg(context, image, true);
+        }
+    };
+    input.click();
 }
 
 async function saveImage(e) {

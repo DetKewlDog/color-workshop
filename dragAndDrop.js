@@ -206,13 +206,13 @@ function loadImg(ctx, file, resize) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let width = img.width, height = img.height;
         if (resize) {
-            if (img.width != 256 && img.width >= img.height) {
-                height = img.height / img.width * 256;
-                width = 256;
+            if (img.width != 300 && img.width >= img.height) {
+                height = img.height / img.width * 300;
+                width = 300;
             }
-            else if (img.height != 256) {
-                width = img.width / img.height * 256;
-                height = 256;
+            else if (img.height != 300) {
+                width = img.width / img.height * 300;
+                height = 300;
             }
         }
         else {

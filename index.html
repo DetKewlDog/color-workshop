@@ -33,19 +33,23 @@
     <canvas id="color-canvas" style="display:none"></canvas>
     <section style="display:flex; width:100%;height: 100vh;">
         <div class="text-small" style="background-color:#2E2E36;">
-            <h1 style="margin-top: 15%;">Image Operations</h1><br>
+            <h1 style="margin-top: 15%;">Image Operations</h1>
             <canvas id="image"
+                onclick="loadImage(event);"
                 ondragover="dragOverHandler(event);"
                 ondrop="imgDrop(event);"
                 oncontextmenu="dragOverHandler(event);"
-                width="256" height="256">
+                width="300" height="300">
             </canvas><br>
-            <button class="btn" onclick="extractPalette()">Extract Palette</button>
-            <button class="btn" onclick="applyPalette()">Apply Palette</button><br>
+            <button class="btn" onclick="loadImage(event)">Import Image</button>
+            <button class="btn" onclick="saveImage(event)">Export Image</button><br>
+
             <button id="ref-pal" class="pal-input" ondragover="setDraggedOver(event)" ondrop="dragToPalInput(event)">Ref pal</button>
             <button class="arrow" style="margin-top: 0%;">⇨</button>
             <button id="new-pal" class="pal-input" ondragover="setDraggedOver(event)" ondrop="dragToPalInput(event)">New pal</button>
-            <button class="btn" onclick="saveImage(event)">Save Image</button>
+
+            <button class="btn" onclick="extractPalette()">Extract Palette</button>
+            <button class="btn" onclick="applyPalette()">Apply Palette</button><br>
         </div>
 
         <div id="workspace" style="width: 50%;">
@@ -57,7 +61,7 @@
         </div>
 
         <div class="text-small" style="background-color:#2E2E36;">
-            <h1 style="margin-top: 15%;">Color Operations</h1><br>
+            <h1 style="margin-top: 15%;">Color Operations</h1>
             <label>Operation:</label>
             <div id="color-op" onchange="changeColorOp()" class="dropdown" dropdown>
                 <button id="ddtext" class="dropbtn">Dropdown</button>
