@@ -75,9 +75,7 @@ function extractPalette() {
         let B = hexToRgb(b);
         A = (A.r + A.g + A.b) / 3;
         B = (B.r + B.g + B.b) / 3;
-        if (A < B) return -1;
-        if (A > B) return 1;
-        return 0;
+        return A - B;
     });
     var pals = Math.floor(colors.length / 10) + (colors.length % 10 == 0 ? 1 : 0);
     if (Object.keys(p_dict).length + pals >= 5) return;
