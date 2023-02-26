@@ -5,6 +5,7 @@ body {
     font-family: "Cutive", sans-serif;
     margin:0;
     word-spacing: 0.25em;
+    overflow: hidden;
     user-select: none; /* CSS3 (little to no support) */
     -ms-user-select: none; /* IE 10+ */
     -moz-user-select: none; /* Gecko (Firefox) */
@@ -23,9 +24,9 @@ p, a {
     color:#DEDEDE;
 }
 footer {
-    position: fixed;
+    position:sticky;
     bottom: 0;
-    width: 100%;
+    width: 600px;
     height: 100px;
     margin: 0 auto;
     text-align: center;
