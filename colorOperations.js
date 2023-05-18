@@ -138,7 +138,8 @@ const op_dict = {
 
 const format_dict = {
     "rgb": [hexToRgb, rgbToHex],
-    "hsv": [hexToHsv, hsvToHex]
+    "hsv": [hexToHsv, hsvToHex],
+    "hsl": [hexToHsl, hslToHex]
 } ;
 
 function changeColorOp() {
@@ -147,5 +148,5 @@ function changeColorOp() {
 
 function changeColorFormat() {
     colorFormat = format_dict[document.querySelector("#color-format").value];
-    colorOp.calculate();
+    try { colorOp.calculate(); } catch { }
 }

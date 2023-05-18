@@ -1,3 +1,4 @@
+// RGB + HEX
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -14,6 +15,7 @@ function rgbToHex(obj) {
     ).join('');
 }
 
+// HSV
 function hexToHsv(hex) {
     let {r, g, b} = hexToRgb(hex);
     let v = Math.max(r, g, b), c = v - Math.min(r, g, b);
@@ -34,4 +36,33 @@ function hsvToHex(obj) {
         g: Math.round(f(3) * 255),
         b: Math.round(f(1) * 255)
     });
-  }
+}
+
+// HSL
+function hexToHsl(hex) {
+    let {r, g, b} = hexToRgb(hex);
+    let v = Math.max(r, g, b), c = v - Math.min(r, g, b), f = -(1 - Math.abs(v + v - c - 1));
+    let h = c && ((v == r) ? (g - b) / c : ((v == g) ? 2 + (b - r) / c : 4 + (r - g) / c));
+    console.log({
+        r: 42.5 * (h < 0 ? h + 6 : h) / 255 * 360,
+        g: (f ? c / f : 0) * 255,
+        b: (v + v - c) / 2
+    });
+    return {
+        r: 42.5 * (h < 0 ? h + 6 : h),
+        g: (f ? c / f : 0) * 255,
+        b: (v + v - c) / 2
+    };
+}
+
+function hslToHex(obj) {
+    let [h, s, l] = Object.values(obj).map(i => i / 255);
+    h *= 360;
+    let a = s * Math.min(l, 1 - l);
+    let f = (n, k = (n + h / 30) % 12) => l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return rgbToHex({
+        r: Math.round(f(0) * 255),
+        g: Math.round(f(8) * 255),
+        b: Math.round(f(4) * 255)
+    });
+}
