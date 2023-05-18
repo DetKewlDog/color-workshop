@@ -59,10 +59,10 @@ class ColorOperation {
     calculate() {
         this.inputs = Array.from(this.iElement.children)
             .filter(i => i.tagName == "DIV")
-            .map(i => colorFormat[0](i.children[1].value));
+            .map(i => colorSpace[0](colorFormat[0](i.children[1].value)));
         if (this.inputs.some(x => x == null)) return;
         this.outputs = this.doOperation(this.inputs);
-        this.outputs = this.outputs.map((i) => colorFormat[1](i));
+        this.outputs = this.outputs.map((i) => colorFormat[1](colorSpace[1](i)));
 
         var o = Array.from(this.oElement.children)
             .filter(element => element.tagName == "DIV")
@@ -82,9 +82,9 @@ class AverageColor extends ColorOperation {
 
     doOperation(i) {
         return [{
-            r: Math.floor((i[0].r + i[1].r) / 2),
-            g: Math.floor((i[0].g + i[1].g) / 2),
-            b: Math.floor((i[0].b + i[1].b) / 2),
+            r: (i[0].r + i[1].r) / 2,
+            g: (i[0].g + i[1].g) / 2,
+            b: (i[0].b + i[1].b) / 2,
         }];
     }
 }
@@ -118,10 +118,11 @@ class Invert extends ColorOperation {
     constructor() { super(1, 1); }
 
     doOperation(i) {
+        var x = colorSpace[0]({ r: 255, g: 255, b: 255 });
         return [{
-            r: 255 - i[0].r,
-            g: 255 - i[0].g,
-            b: 255 - i[0].b,
+            r: x.r - i[0].r,
+            g: x.g - i[0].g,
+            b: x.b - i[0].b,
         }];
     }
 }
@@ -142,11 +143,28 @@ const format_dict = {
     "HSL": [hexToHsl, hslToHex]
 } ;
 
+const colorspace_dict = {
+    "Gamma": [
+        (c) => ({ r: c.r, g: c.g, b: c.b }),
+        (c) => ({ r: Math.floor(c.r), g: Math.floor(c.g), b: Math.floor(c.b) }),
+    ],
+    "Linear": [
+        (c) => ({ r: c.r ** 2, g: c.g ** 2, b: c.b ** 2 }),
+        (c) => ({ r: Math.floor(Math.sqrt(c.r)), g: Math.floor(Math.sqrt(c.g)), b: Math.floor(Math.sqrt(c.b)) })
+    ]
+}
+let colorSpace = colorspace_dict["Linear"];
+
 function changeColorOp(e) {
     colorOp = new op_dict[e.target.value]();
 }
 
 function changeColorFormat(e) {
     colorFormat = format_dict[e.target.value];
+    try { colorOp.calculate(); } catch { }
+}
+
+function changeColorSpace(e) {
+    colorSpace = colorspace_dict[e.target.value];
     try { colorOp.calculate(); } catch { }
 }

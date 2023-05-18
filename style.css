@@ -53,8 +53,8 @@ input[type="color"]::-webkit-color-swatch {
 label {
     display: block;
     margin: auto;
-    width: 128px;
-    padding: 0 10px;
+    padding: 0 4px;
+    width: 110px;
     text-align: center;
 }
 
@@ -123,7 +123,7 @@ label {
     background-color: #4A4A52;
     color: white;
     font-size: 16px;
-    width: 128px;
+    width: 117px;
     cursor: pointer;
     border:none;
     border-radius: 4px;
@@ -133,8 +133,8 @@ label {
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     display:inline-block;
-    width: 128px;
-    padding: 0 10px;
+    width: 110px;
+    padding: 0 4px;
 }
   
 /* Dropdown Content (Hidden by Default) */
@@ -142,7 +142,7 @@ label {
     display: none;
     position: absolute;
     background-color: #383840;
-    width: 125px;
+    width: 107px;
     z-index: 1;
     border: 2px solid #4A4A52;
     border-radius: 4px;
@@ -156,7 +156,7 @@ label {
     color: #DEDEDE;
     padding: 6px 16px;
     text-decoration: none;
-    width: 125px;
+    width: 107px;
     font-family: inherit;
     border: 2px solid #4A4A52;
     border-left:none;

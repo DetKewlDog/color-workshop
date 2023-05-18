@@ -47,7 +47,7 @@
     <canvas id="canvas" style="display:none"></canvas>
     <canvas id="color-canvas" style="display:none"></canvas>
     <section style="display:flex; width:100%;height: 100vh;">
-        <div class="text-small" style="background-color:#2E2E36;">
+        <div class="text-small" style="background-color:#2E2E36; width:23.5%">
             <h1 style="margin-top: 15%;">Image Operations</h1>
             <canvas id="image"
                 onclick="loadImage(event);"
@@ -68,7 +68,7 @@
             <button class="btn" onclick="applyPalette()">Apply Palette</button><br>
         </div>
 
-        <div id="workspace" style="width: 64%;">
+        <div id="workspace" style="width: 59%;">
             <div style="text-align: center; width: 100%;">
                 <h2>🎨 Color Workshop 🎨</h2>
                 <p>by DetKewlDog</p>
@@ -81,6 +81,7 @@
             <table>
                 <td>
                     <label>Operation</label>
+                    <label>Format</label>
                     <label>Color Space</label>
                 </td>
                 <td>
@@ -94,6 +95,10 @@
                         RGB
                         HSV
                         HSL
+                    </div>
+                    <div onchange="changeColorSpace(event)" dropdown>
+                        Linear
+                        Gamma
                     </div>
                 </td>
             </table>
