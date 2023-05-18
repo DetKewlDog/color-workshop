@@ -1,5 +1,7 @@
 let p_dict = {}, palName = 'p1', palIndex = 0, parent1 = undefined, parent2 = undefined;
 
+const MAX_PALETTE_COUNT = 7;
+
 function getPaletteElement() {
     return document.querySelector(`#${palName}`);
 }
@@ -15,7 +17,7 @@ function createPalette(name = "") {
     workspace.insertBefore(pal, addpal);
     drawPalette();
     changePal(palName);
-    if (Object.keys(p_dict).length >= 5) {
+    if (Object.keys(p_dict).length >= MAX_PALETTE_COUNT) {
         addpal.style.display = "none";
     }
 }
@@ -28,7 +30,7 @@ function changePal(pName) {
 function removePalette() {
     delete p_dict[palName];
     getPaletteElement().remove();
-    if (Object.keys(p_dict).length < 5) {
+    if (Object.keys(p_dict).length < MAX_PALETTE_COUNT) {
         document.querySelector("#addpal").style.removeProperty("display");
     }
 }
@@ -108,7 +110,7 @@ function add(isRight) {
 }
 
 function modify(id) {
-    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + 1].children[1].value;
+    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + (id != 9)].children[1].value;
 }
 
 function remove(id) {
