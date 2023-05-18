@@ -119,7 +119,7 @@ label {
 /* Style The Dropdown Button */
 .dropbtn {
     vertical-align: middle;
-    font-family: "Cutive", sans-serif;
+    font-family: inherit;
     background-color: #4A4A52;
     color: white;
     font-size: 16px;
@@ -157,7 +157,7 @@ label {
     padding: 6px 16px;
     text-decoration: none;
     width: 125px;
-    font-family: "Cutive", sans-serif;
+    font-family: inherit;
     border: 2px solid #4A4A52;
     border-left:none;
     border-right:none;
@@ -192,7 +192,7 @@ canvas {
 
 .btn {
     vertical-align: middle;
-    font-family: "Cutive", sans-serif;
+    font-family: inherit;
     background-color: #4A4A52;
     color: white;
     font-size: 16px;
@@ -207,7 +207,7 @@ canvas {
 }
 
 .pal-input {
-    font-family: "Cutive", sans-serif;
+    font-family: inherit;
     font-size: 16px;
     color: #DEDEDE;
     border: 4px dashed #72727A;
