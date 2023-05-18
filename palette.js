@@ -1,6 +1,7 @@
 let p_dict = {}, palName = 'p1', palIndex = 0, parent1 = undefined, parent2 = undefined;
 
 const MAX_PALETTE_COUNT = 7;
+const MAX_COLOR_COUNT = 12;
 
 function getPaletteElement() {
     return document.querySelector(`#${palName}`);
@@ -98,9 +99,9 @@ function drawPalette() {
     p.addEventListener('drag', setDragging);
     p.addEventListener('dragover', setDraggedOver);
     p.addEventListener('drop', dragPalette);
-    if (p_dict[palName] == null || p_dict[palName].length < 10) addPlusBtn(0);
+    if (p_dict[palName] == null || p_dict[palName].length < MAX_COLOR_COUNT) addPlusBtn(0);
     p_dict[palName]?.forEach((color, index) => addColorBtn(color, index));
-    if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < 10) addPlusBtn(1)
+    if (p_dict[palName] != null && p_dict[palName].length != 0 && p_dict[palName].length < MAX_COLOR_COUNT) addPlusBtn(1)
     reloadPickers();
 }
 
@@ -110,7 +111,7 @@ function add(isRight) {
 }
 
 function modify(id) {
-    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + (id != 9)].children[1].value;
+    p_dict[palName][id] = document.querySelector(`#${palName}`).children[id + (id != MAX_COLOR_COUNT - 1)].children[1].value;
 }
 
 function remove(id) {
