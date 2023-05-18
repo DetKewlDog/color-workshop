@@ -130,23 +130,23 @@ let colorOp = new AverageColor();
 let colorFormat = [hexToRgb, rgbToHex];
 
 const op_dict = {
-    "avg": AverageColor,
-    "dis": ColorDistance,
-    "gra": Grayscale,
-    "inv": Invert,
+    "Average": AverageColor,
+    "Distance": ColorDistance,
+    "Grayscale": Grayscale,
+    "Invert": Invert,
 } ;
 
 const format_dict = {
-    "rgb": [hexToRgb, rgbToHex],
-    "hsv": [hexToHsv, hsvToHex],
-    "hsl": [hexToHsl, hslToHex]
+    "RGB": [hexToRgb, rgbToHex],
+    "HSV": [hexToHsv, hsvToHex],
+    "HSL": [hexToHsl, hslToHex]
 } ;
 
-function changeColorOp() {
-    colorOp = new op_dict[document.querySelector("#color-op").value]();
+function changeColorOp(e) {
+    colorOp = new op_dict[e.target.value]();
 }
 
-function changeColorFormat() {
-    colorFormat = format_dict[document.querySelector("#color-format").value];
+function changeColorFormat(e) {
+    colorFormat = format_dict[e.target.value];
     try { colorOp.calculate(); } catch { }
 }

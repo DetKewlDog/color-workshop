@@ -1,5 +1,21 @@
 var lst = document.querySelectorAll('[dropdown]');
 lst.forEach(dropdown => {
+    createDropdown(dropdown); // actually sets up the dropdown's inner HTML
+    tweakDropdown(dropdown); // tweaks the dropdown to fix some bugs
+});
+
+function createDropdown(dropdown) {
+    dropdown.classList.add('dropdown');
+    dropdown.innerHTML = '<button id="ddtext" class="dropbtn">Dropdown</button>\n'
+        + '<div class="dropdown-content">\n'
+        + dropdown.innerText
+            .split(' ')
+            .map(x => `<button value="${x}">${x}</button><br>\n`)
+            .join('')
+        + '</div>';
+}
+
+function tweakDropdown(dropdown) {
     var text = dropdown.querySelector('#ddtext');
     var options = Array.from(dropdown.children[1].querySelectorAll('button'));
     options.forEach(op => {
@@ -12,4 +28,4 @@ lst.forEach(dropdown => {
         });
     });
     options[0].dispatchEvent(new Event('click'));
-});
+}

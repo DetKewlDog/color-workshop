@@ -81,25 +81,19 @@
             <table>
                 <td>
                     <label>Operation</label>
-                    <label>Format</label>
+                    <label>Color Space</label>
                 </td>
                 <td>
-                    <div id="color-op" onchange="changeColorOp()" class="dropdown" dropdown>
-                        <button id="ddtext" class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                            <button value="avg">Average</button><br>
-                            <button value="dis">Distance</button><br>
-                            <button value="gra">Grayscale</button><br>
-                            <button value="inv">Invert</button><br>
-                        </div>
+                    <div onchange="changeColorOp(event)" dropdown>
+                        Average
+                        Distance
+                        Grayscale
+                        Invert
                     </div>
-                    <div id="color-format" onchange="changeColorFormat()" class="dropdown" dropdown>
-                        <button id="ddtext" class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                            <button value="rgb">RGB</button><br>
-                            <button value="hsv">HSV</button><br>
-                            <button value="hsl">HSL</button><br>
-                        </div>
+                    <div onchange="changeColorFormat(event)" dropdown>
+                        RGB
+                        HSV
+                        HSL
                     </div>
                 </td>
             </table>
