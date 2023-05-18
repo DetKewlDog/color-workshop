@@ -10,8 +10,8 @@ class ColorOperation {
 
         this.iElement = document.querySelector("#inputs");
         this.iElement.innerText = '';
-        this.inputs.forEach((color, index) => { 
-            this.addColor(this.Type.INPUT, index) 
+        this.inputs.forEach((color, index) => {
+            this.addColor(this.Type.INPUT, index)
             if (index + 1 != this.inputs.length) this.addArrow(this.iElement);
         });
 
@@ -35,7 +35,7 @@ class ColorOperation {
         btn.classList.add("coloris");
         btn.draggable = true;
         if (type == this.Type.INPUT) btn.addEventListener('dragover', setDraggedOver);
-        btn.addEventListener('drag', setDragging); 
+        btn.addEventListener('drag', setDragging);
         btn.addEventListener('drop', () => {
             applyDrag();
             if (type == this.Type.INPUT) this.calculate();
@@ -59,10 +59,10 @@ class ColorOperation {
     calculate() {
         this.inputs = Array.from(this.iElement.children)
             .filter(i => i.tagName == "DIV")
-            .map(i => hexToRgb(i.children[1].value));
+            .map(i => colorFormat[0](i.children[1].value));
         if (this.inputs.some(x => x == null)) return;
         this.outputs = this.doOperation(this.inputs);
-        this.outputs = this.outputs.map((i) => rgbToHex(i));
+        this.outputs = this.outputs.map((i) => colorFormat[1](i));
 
         var o = Array.from(this.oElement.children)
             .filter(element => element.tagName == "DIV")
@@ -127,6 +127,7 @@ class Invert extends ColorOperation {
 }
 
 let colorOp = new AverageColor();
+let colorFormat = [hexToRgb, rgbToHex];
 
 const op_dict = {
     "avg": AverageColor,
@@ -135,6 +136,16 @@ const op_dict = {
     "inv": Invert,
 } ;
 
+const format_dict = {
+    "rgb": [hexToRgb, rgbToHex],
+    "hsv": [hexToHsv, hsvToHex]
+} ;
+
 function changeColorOp() {
     colorOp = new op_dict[document.querySelector("#color-op").value]();
+}
+
+function changeColorFormat() {
+    colorFormat = format_dict[document.querySelector("#color-format").value];
+    colorOp.calculate();
 }

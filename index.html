@@ -78,16 +78,30 @@
 
         <div class="text-small" style="background-color:#2E2E36;">
             <h1 style="margin-top: 15%;">Color Operations</h1>
-            <label>Operation:</label>
-            <div id="color-op" onchange="changeColorOp()" class="dropdown" dropdown>
-                <button id="ddtext" class="dropbtn">Dropdown</button>
-                <div class="dropdown-content">
-                    <button value="avg">Average</button><br>
-                    <button value="dis">Distance</button><br>
-                    <button value="gra">Grayscale</button><br>
-                    <button value="inv">Invert</button><br>
-                </div>
-            </div>
+            <table>
+                <td>
+                    <label>Operation</label>
+                    <label>Format</label>
+                </td>
+                <td>
+                    <div id="color-op" onchange="changeColorOp()" class="dropdown" dropdown>
+                        <button id="ddtext" class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
+                            <button value="avg">Average</button><br>
+                            <button value="dis">Distance</button><br>
+                            <button value="gra">Grayscale</button><br>
+                            <button value="inv">Invert</button><br>
+                        </div>
+                    </div>
+                    <div id="color-format" onchange="changeColorFormat()" class="dropdown" dropdown>
+                        <button id="ddtext" class="dropbtn">Dropdown</button>
+                        <div class="dropdown-content">
+                            <button value="rgb">RGB</button><br>
+                            <button value="hsv">HSV</button><br>
+                        </div>
+                    </div>
+                </td>
+            </table>
             <p>Inputs</p>
             <section id="inputs" style="height: 66px"></section>
             <p>Outputs</p>
