@@ -58,6 +58,35 @@ label {
     text-align: center;
 }
 
+#workspace {
+    /* Customize the scroll bar */
+	scroll-behavior: smooth;
+	scrollbar-width: thin;
+  	scrollbar-color: var(--hl2) var(--hl1);
+}
+
+#workspace::-webkit-scrollbar {
+  	width: 12px;
+}
+
+#workspace::-webkit-scrollbar-track {
+  	background-color: #383840;
+	border-radius: 10px;
+}
+
+#workspace::-webkit-scrollbar-thumb {
+  	background-color: #4A4A52;
+	border-radius: 10px;
+}
+
+#workspace::-webkit-scrollbar-thumb:hover {
+  	background-color: #72727A;
+}
+
+#workspace::-webkit-scrollbar-thumb:active {
+    background-color: #4A4A52;
+}
+
 .btn-pal {
     height: 64px;
     width: 64px;

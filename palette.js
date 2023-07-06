@@ -1,6 +1,6 @@
 let p_dict = {}, palName = 'p1', palIndex = 0, parent1 = undefined, parent2 = undefined;
 
-const MAX_PALETTE_COUNT = 7;
+const MAX_PALETTE_COUNT = 20;
 const MAX_COLOR_COUNT = 12;
 
 function getPaletteElement() {
