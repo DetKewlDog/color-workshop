@@ -10,6 +10,10 @@ body {
     -ms-user-select: none; /* IE 10+ */
     -moz-user-select: none; /* Gecko (Firefox) */
     -webkit-user-select: none; /* Webkit (Safari, Chrome) */
+
+    scroll-behavior: smooth;
+	scrollbar-width: thin;
+  	scrollbar-color: var(--hl2) var(--hl1);
 }
 h1 {
     font-size: 28px;
@@ -18,7 +22,7 @@ h1 {
 }
 h2 {
     font-size: 48px;
-    height: 38px;
+    margin-bottom: 0;
 }
 p, a {
     color:#DEDEDE;
@@ -34,14 +38,29 @@ footer {
 }
 div {
     text-align: center;
-    width: 355px;
 }
 
-section > div.text-small:nth-child(1) {
-    height: 100vh;
+#app {
+    display:flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
 }
-section > div.text-small:nth-child(3) {
+
+#app > div {
+    width: 355px;
+    overflow: auto;
+}
+
+#app > div:nth-child(1),
+#app > div:nth-child(3) {
     height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #2E2E36;
+}
+#app > div:nth-child(2) {
+    overflow-x: auto;
 }
 
 input[type="color"] {
@@ -67,10 +86,6 @@ label {
 }
 
 #workspace {
-    /* Customize the scroll bar */
-	scroll-behavior: smooth;
-	scrollbar-width: thin;
-  	scrollbar-color: var(--hl2) var(--hl1);
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -78,25 +93,25 @@ label {
     height: 100vh;
 }
 
-#workspace::-webkit-scrollbar {
+::-webkit-scrollbar {
   	width: 12px;
 }
 
-#workspace::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   	background-color: #383840;
 	border-radius: 10px;
 }
 
-#workspace::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   	background-color: #4A4A52;
 	border-radius: 10px;
 }
 
-#workspace::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   	background-color: #72727A;
 }
 
-#workspace::-webkit-scrollbar-thumb:active {
+::-webkit-scrollbar-thumb:active {
     background-color: #4A4A52;
 }
 
