@@ -64,15 +64,14 @@
 <body>
     <canvas id="canvas" style="display:none"></canvas>
     <canvas id="color-canvas" style="display:none"></canvas>
-    <section style="display:flex; width:100%;height: 100vh;">
-        <div class="text-small" style="background-color:#2E2E36; width:23%">
+    <section style="display:flex; width:100%; height: 100%; justify-content: space-between;">
+        <div class="text-small" style="background-color:#2E2E36;">
             <h1 style="margin-top: 15%;">Image Operations</h1>
             <canvas id="image"
                 onclick="loadImage(event);"
                 ondragover="dragOverHandler(event);"
                 ondrop="imgDrop(event);"
-                oncontextmenu="dragOverHandler(event);"
-                width="300" height="300">
+                oncontextmenu="dragOverHandler(event);">
             </canvas><br>
             <button class="btn" onclick="loadImage(event)">Import Image</button>
             <button class="btn" onclick="saveImage(event)">Export Image</button><br>
@@ -86,12 +85,16 @@
             <button class="btn" onclick="applyPalette()">Apply Palette</button><br>
         </div>
 
-        <div id="workspace" style="width: 59%; overflow: auto; overflow-x: auto;">
+        <div id="workspace" style="overflow: auto; overflow-x: auto;">
             <div style="text-align: center; width: 100%;">
                 <h2>🎨 Color Workshop 🎨</h2>
                 <p>by DetKewlDog</p>
             </div>
             <button id="addpal" class="btn-pal new" oncontextmenu="return false;" onclick="createPalette()">▼</button>
+            <footer>
+                <p class="text-small">Swap ᴄᴛʀʟ ・ Clone ᴀʟᴛ ・ Delete 🖱ʀᴍʙ ・ Palette ⇧sʜɪғᴛ</p>
+                Site created by <a href="https://detkewldog.netlify.app" target="_blank">DetKewlDog</a>, and is <a href="https://github.com/DetKewlDog/color-workshop" target="_blank">open-source on GitHub</a>
+           </footer>
         </div>
 
         <div class="text-small" style="background-color:#2E2E36;">
@@ -131,10 +134,5 @@
     <script src="colorOperations.js"></script>
     <script src="dropdown.js"></script>
     <script src="secret.js"></script>
-
-    <footer>
-        <p class="text-small">Swap ᴄᴛʀʟ ・ Clone ᴀʟᴛ ・ Delete 🖱ʀᴍʙ ・ Palette ⇧sʜɪғᴛ</p>
-        Site created by <a href="https://detkewldog.netlify.app" target="_blank">DetKewlDog</a>, and is <a href="https://github.com/DetKewlDog/color-workshop" target="_blank">open-source on GitHub</a>
-   </footer>
 </body>
 </html>
