@@ -1,0 +1,28 @@
+{
+	"short_name": "Color Workshop",
+	"name": "Color Workshop",
+	"icons": [
+		{
+			"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='12 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>",
+			"type": "image/svg",
+			"sizes": "128x128",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='12 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>",
+			"type": "image/svg",
+			"sizes": "192x192",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='12 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>",
+			"type": "image/svg",
+			"sizes": "512x512",
+			"purpose": "any maskable"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#6A3697",
+	"background_color": "#282830"
+}

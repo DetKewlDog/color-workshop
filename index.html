@@ -1,20 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJ5Y5G9HXS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <title>Color Workshop</title>
 
-      gtag('config', 'G-YJ5Y5G9HXS');
-    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Minimalistic website for palette/color/image manipulation." />
     <meta name="robots" content="follow, index">
-    <title>Color Workshop</title>
+
+    <meta property="og:title" content="🎨 Color Workshop 🎨">
+    <meta property="og:type" content="🎨 Color Workshop 🎨">
+    <meta property="og:description" content="Minimalistic website for palette/color/image manipulation.">
+    <meta property="og:url" content="https://colorworkshop.netlify.app/">
+    <meta property="og:image" content="https://cdn.discordapp.com/attachments/922185010205822979/1131585103131316234/image.png">
+    <meta name="author" content="DetKewlDog">
+    <meta name="theme-color" content="#6A3697">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
     <link rel="stylesheet" href="style.css">
 
@@ -27,18 +30,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 
-    <meta property="og:title" content="🎨 Color Workshop 🎨">
-    <meta property="og:type" content="🎨 Color Workshop 🎨">
-    <meta property="og:description" content="Minimalistic website for palette/color/image manipulation.">
-    <meta property="og:url" content="https://colorworkshop.netlify.app/">
-    <meta property="og:image" content="https://cdn.discordapp.com/attachments/922185010205822979/1131585103131316234/image.png">
-    <meta name="author" content="DetKewlDog">
-    <meta name="theme-color" content="#6A3697">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJ5Y5G9HXS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YJ5Y5G9HXS');
+    </script>
 
     <script src="color.js"></script>
     <script src="dragAndDrop.js"></script>
     <script src="imageOperations.js"></script>
+
     <style>
         .clr-field,
         .clr-field button {
