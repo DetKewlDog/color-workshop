@@ -36,6 +36,9 @@ footer {
     user-select: none;
     pointer-events: none;
 }
+footer a {
+    pointer-events: all;
+}
 div {
     text-align: center;
 }
