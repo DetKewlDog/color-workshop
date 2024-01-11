@@ -3,19 +3,19 @@
 	"name": "Color Workshop",
 	"icons": [
 		{
-			"src": "https://cdn.discordapp.com/attachments/912581812931416134/1131881770766319646/g14774.png",
+			"src": "/g14774.png",
 			"type": "image/png",
 			"sizes": "128x128",
 			"purpose": "any maskable"
 		},
 		{
-			"src": "https://cdn.discordapp.com/attachments/912581812931416134/1131881538997465088/g14774.png",
+			"src": "/g14774.png",
 			"type": "image/png",
 			"sizes": "192x192",
 			"purpose": "any maskable"
 		},
 		{
-			"src": "https://cdn.discordapp.com/attachments/912581812931416134/1131881321279537182/image.png",
+			"src": "/image.png",
 			"type": "image/png",
 			"sizes": "512x512",
 			"purpose": "any maskable"
